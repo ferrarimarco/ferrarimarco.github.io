@@ -72,6 +72,7 @@
 					<stopKey>foo</stopKey>
 					<stopPort>9000</stopPort>
 					<reload>manual</reload>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<webAppConfig>
 						<contextPath>/${project.name}</contextPath>
 						<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
