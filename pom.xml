@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>info.ferrarimarco</groupId>
+	<artifactId>personal-website</artifactId>
+	<version>0.0.1</version>
+
+	<properties>
+
+		<jetty.port>9001</jetty.port>
+
+		<!-- Plugin versions -->
+		<jetty-maven-plugin-version>9.1.5.v20140505</jetty-maven-plugin-version>
+		<maven-clean-plugin-version>2.5</maven-clean-plugin-version>
+		<maven-war-plugin-version>2.3</maven-war-plugin-version>
+		<yeoman-maven-plugin-version>0.2</yeoman-maven-plugin-version>
+
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.trecloux</groupId>
+				<artifactId>yeoman-maven-plugin</artifactId>
+				<version>${yeoman-maven-plugin-version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin-version}</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>yo/dist</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${maven-clean-plugin-version}</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>yo/dist</directory>
+						</fileset>
+						<fileset>
+							<directory>yo/.tmp</directory>
+						</fileset>
+						<fileset>
+							<directory>yo/app/components</directory>
+						</fileset>
+						<fileset>
+							<directory>yo/node_modules</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty-maven-plugin-version}</version>
+				<configuration>
+					<stopKey>foo</stopKey>
+					<stopPort>9000</stopPort>
+					<reload>manual</reload>
+					<webAppConfig>
+						<contextPath>/${project.name}</contextPath>
+						<baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+							<resourcesAsCSV>src/main/webapp,yo/dist</resourcesAsCSV>
+						</baseResource>
+					</webAppConfig>
+					<systemProperties>
+						<systemProperty>
+							<name>jetty.port</name>
+							<value>${jetty.port}</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+
+	</build>
+
+</project>
