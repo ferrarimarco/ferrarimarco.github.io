@@ -87,3 +87,16 @@ body {
         border-bottom: 0;
     }
 }
+
+.roboto-slab {
+	font-family: 'Roboto Slab', serif;
+}
+
+.roboto {
+	font-family: 'Roboto', sans-serif;
+}
+
+.contact-icon {
+	height:60px;
+	width:60px;
+}
