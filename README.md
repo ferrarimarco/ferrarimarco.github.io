@@ -1,6 +1,6 @@
 personal-website
 ================
 
-This is the source code of my personal website ( http://www.ferrarimarco.info ). Currently it's a Maven project but this will change as Maven it's not needed anymore.
+This is the source code of my personal website ( http://www.ferrarimarco.info ).
 
-It was scaffolded with Yeoman (using the webapp generator, 0.4.9). It represented a way for me to move the first steps with Yeoman, Bootstrap, Grunt, Bower and other tools.
+It was scaffolded with Yeoman using the webapp generator. It represented a way for me to move the first steps with Yeoman, Bootstrap, Grunt, Bower and other tools.
