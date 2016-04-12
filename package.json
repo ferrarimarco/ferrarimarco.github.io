@@ -1,11 +1,16 @@
 {
   "name": "ferrarimarco-personal-website",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Marco Ferrari - Personal Website",
   "homepage": "ferrarimarco.github.io",
   "author": {
     "name": "Marco Ferrari",
     "email": "ferrari.marco@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ferrarimarco/personal-website.git"
   },
   "devDependencies": {
     "autoprefixer": "^6.2.3",
