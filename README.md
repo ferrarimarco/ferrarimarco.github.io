@@ -5,8 +5,11 @@ It was scaffolded with [Yeoman](http://yeoman.io/) using [generator-webapp]([htt
 
 ## Dependencies
 Check the [package.json](../blob/master/package.json) descriptor. you basically need:
-- Node.js (>= 0.12.0)
-- gulp (>= 3.9.0)
+- Node.js (>= 5.10.1)
+- gulp (>= 4.0.0)
+
+### Install
+If you have cloned this repo or want to reinstall, make sure there's no `node_modules` or `Gemfile.lock` folder/file and then run `npm install` and `bundle install`.
 
 ## To get started
 
@@ -25,8 +28,3 @@ $ gulp build [--prod]
 ```sh
 $ gulp deploy
 ```
-
-## Install
-If you have cloned this repo or want to reinstall, make sure there's no
-`node_modules` or `Gemfile.lock` folder/file and then run `npm install` and
-`bundle install`.
