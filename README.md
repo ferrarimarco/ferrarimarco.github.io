@@ -1,30 +1,32 @@
 # personal-website
 This is the source code of my personal website: http://ferrarimarco.info
 
-It was scaffolded with [Yeoman](http://yeoman.io/) using [generator-webapp]([https://github.com/yeoman/generator-webapp]).
+It was scaffolded with [Yeoman](http://yeoman.io/) using [generator-webapp]([https://github.com/yeoman/generator-jekyllized]).
 
 ## Dependencies
 Check the [package.json](../blob/master/package.json) descriptor. you basically need:
 - Node.js (>= 0.12.0)
 - gulp (>= 3.9.0)
 
-## How to run
-To start developing, run:
+## To get started
 
 ```sh
-$ gulp serve
+$ gulp [--prod]
 ```
 
-This will start local web server, open http://localhost:9000 in your default browser and watch files for changes, reloading the browser automatically.
+And you'll have a new Jekyll site generated for you and displayed in your browser. If you want to run it with production settings, just add `--prod`.
 
-To make a production-ready build of the app, run:
+## Usage
 
 ```sh
-$ gulp
+$ gulp build [--prod]
 ```
-
-To preview the production-ready build to check if everything, run:
 
 ```sh
-$ gulp serve:dist
+$ gulp deploy
 ```
+
+## Install
+If you have cloned this repo or want to reinstall, make sure there's no
+`node_modules` or `Gemfile.lock` folder/file and then run `npm install` and
+`bundle install`.
