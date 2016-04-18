@@ -163,6 +163,13 @@ gulp.task('fonts', () =>
     .pipe($.size({title: 'fonts'}))
 );
 
+// 'gulp fonts' -- copies your fonts to the temporary assets folder
+gulp.task('favicon', () =>
+  gulp.src('src/assets/favicon.ico')
+    .pipe(gulp.dest('.tmp/assets'))
+    .pipe($.size({title: 'favicon'}))
+);
+
 // 'gulp html' -- does nothing
 // 'gulp html --prod' -- minifies and gzips our HTML files
 gulp.task('html', () =>
@@ -226,7 +233,7 @@ gulp.task('serve', () => {
 // production settings
 gulp.task('assets', gulp.series(
   gulp.series('clean:assets'),
-  gulp.parallel('styles', 'scripts', 'fonts', 'images')
+  gulp.parallel('styles', 'scripts', 'fonts', 'images', 'favicon')
 ));
 
 // 'gulp assets:copy' -- copies the assets into the dist folder, needs to be

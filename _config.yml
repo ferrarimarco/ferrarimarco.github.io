@@ -21,7 +21,7 @@ author:
   github: ferrari.marco
   facebook: ferrari.marco
   linkedin: ferrarimark
-  stackoverflow: 653462
+  stackoverflow: '653462'
 
 # _config.build.yml overwrites these options when you run `gulp build`
 # Enables future posts (posts with dates in the future) and drafts
