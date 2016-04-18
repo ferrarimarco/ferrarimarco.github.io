@@ -163,10 +163,10 @@ gulp.task('fonts', () =>
     .pipe($.size({title: 'fonts'}))
 );
 
-// 'gulp fonts' -- copies your fonts to the temporary assets folder
+// 'gulp fonts' -- copies your favicon to the temporary assets folder
 gulp.task('favicon', () =>
   gulp.src('src/assets/favicon.ico')
-    .pipe(gulp.dest('.tmp/assets'))
+    .pipe(gulp.dest('.tmp'))
     .pipe($.size({title: 'favicon'}))
 );
 
