@@ -214,11 +214,11 @@ gulp.task('serve', () => {
   });
 
   // Watch various files for changes and do the needful
-  gulp.watch(['src/**/*.md', 'src/**/*.html', 'src/**/*.yml'], gulp.series('jekyll', reload));
-  gulp.watch(['src/**/*.xml', 'src/**/*.txt'], gulp.series('jekyll'));
-  gulp.watch('src/assets/javascript/**/*.js', gulp.series('scripts'));
-  gulp.watch('src/assets/scss/**/*.scss', gulp.series('styles'));
-  gulp.watch('src/assets/images/**/*', reload);
+  gulp.watch(['src/**/*.md', 'src/**/*.html', 'src/**/*.yml'], { usePolling: true }, gulp.series('jekyll', reload));
+  gulp.watch(['src/**/*.xml', 'src/**/*.txt'], { usePolling: true }, gulp.series('jekyll'));
+  gulp.watch('src/assets/javascript/**/*.js', { usePolling: true }, gulp.series('scripts'));
+  gulp.watch('src/assets/scss/**/*.scss', { usePolling: true }, gulp.series('styles'));
+  gulp.watch('src/assets/images/**/*', { usePolling: true }, reload);
 });
 
 // 'gulp assets' -- cleans out your assets and rebuilds them
