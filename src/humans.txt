@@ -3,11 +3,7 @@
 
 # TEAM
 
-    Marco Ferrari -- <role> -- @ferrarimarco
-
-# THANKS
-
-    <name>
+    Marco Ferrari -- Main developer -- ferrari.marco@gmail.com
 
 # TECHNOLOGY COLOPHON
 
