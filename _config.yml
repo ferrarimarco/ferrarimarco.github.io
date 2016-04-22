@@ -23,6 +23,9 @@ author:
   stackoverflow: marco-ferrari
   stackoverflow_user_id: '653462'
 
+# Google analytics ID: UA-zzzzzzzz-z
+google_analytics: UA-18832248-1
+
 # _config.build.yml overwrites these options when you run `gulp build`
 # Enables future posts (posts with dates in the future) and drafts
 future: true
