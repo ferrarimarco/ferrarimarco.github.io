@@ -1,8 +1,8 @@
 # Title, decription, tagline and URL for your site
 # Can be used in your theme by calling 'site.title' and so on
-title: Marco Ferrari - computer science engineer
+title: Marco Ferrari - software engineer
 description: Personal website of Marco Ferrari
-url: http://ferrarimarco.github.io
+url: http://ferrarimarco.info
 
 # Used so Jekyll outputs the site correctly so Gulp can do what it wants
 source: src
@@ -16,8 +16,7 @@ author:
   name: Marco Ferrari
   email: ferrari.marco@gmail.com
   uri: http://ferrarimarco.info
-  bio: Computer Science Engineer
-  twitter: ferrarimarco
+  bio: software engineer
   github: ferrari.marco
   facebook: ferrari.marco
   linkedin: ferrarimark
