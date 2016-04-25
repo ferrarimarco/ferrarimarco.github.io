@@ -7,7 +7,7 @@
     <div class="footer-col-wrapper">
       <div class="footer-col">
         <ul class="contact-list">
-          <li>{{ site.author.name }}</li>
+          <li>{{ site.author.name }}{% if site.author.cv_url %} - <a href="{{ site.author.cv_url }}" class="bold">CV</a>{% endif %}</li>
           {% if site.author.email %}
           <li>
             <a href="mailto:{{ site.author.email }}">
