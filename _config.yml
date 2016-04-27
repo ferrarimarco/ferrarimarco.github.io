@@ -74,5 +74,5 @@ jekyll-archives:
   permalinks:
     year: '/blog/archive/:year/'
     month: '/blog/archive/:year/:month/'
-    category: '/blog/category/:name/'
-    tags: '/blog/tag/:name/'
+    category: '/blog/archive/category/:name/'
+    tag: '/blog/archive/tag/:name/'
