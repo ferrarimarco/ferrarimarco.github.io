@@ -12,4 +12,15 @@ layout: default
     {{ content }}
   </div>
 
+  <div class="post-footer post-meta">
+    {% if page.categories.size > 0 %}
+      <p>Categories: {{ page.categories | sort | join: ", "  }}</p>
+    {% endif %}
+    {% if page.tags.size > 0 %}
+      <p>Tags: {{ page.tags | sort | join: ", "  }}</p>
+      <a href="{{ site.jekyll-archives.permalinks.tag | replace: ':name', 'tag_placeholder'}}">aaaa</href>
+    {% endif %}
+
+  </div>
+
 </article>
