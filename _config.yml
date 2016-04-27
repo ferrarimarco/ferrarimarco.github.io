@@ -37,7 +37,8 @@ lsi: false
 limit_posts: 0
 
 # Permalink structure and pagination options
-permalink: pretty
+# pretty = /:categories/:year/:month/:day/:title/
+permalink: /blog/:categories/:year/:month/:day/:title/
 paginate: 10
 paginate_path: 'page:num'
 excerpt_separator: '<!--more-->'
