@@ -6,6 +6,8 @@ categories: development devops provisioning
 tags:
   - ansible
   - ruby
+  - chruby
+  - ruby-install
 ---
 
 Placeholder content
