@@ -73,6 +73,17 @@
             </a>
           </li>
           {% endif %}
+
+          {% if site.author.keybase %}
+          <li>
+            <a href="https://keybase.io/{{ site.author.keybase }}">
+              <span class="icon">
+                <img src="/assets/images/contacts/keybase.png"/>
+              </span>
+              <span class="username">{{ site.author.keybase }}</span>
+            </a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
