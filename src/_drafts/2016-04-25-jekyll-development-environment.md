@@ -2,11 +2,11 @@
 layout: post
 date: 2016-04-25
 title: An Automatically-provisioned Development Environment for Jekyll
-categories: devops provisioning development
+categories: development devops provisioning
 tags:
   - ansible
-  - vagrant
   - jekyll
+  - vagrant
 ---
 
 Placeholder content

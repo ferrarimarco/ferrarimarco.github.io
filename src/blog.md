@@ -1,10 +1,13 @@
 ---
-layout: page
+layout: post
 title: Blog
 permalink: /blog/
+include_rss_link: true
+additional_css_classes: "post-list"
 ---
-{% for post in site.posts %}
-####[{{ post.date | date: "%b %-d, %Y" }} - {{ post.title }}]({{ post.url | prepend: site.baseurl }})
-{% endfor %}
 
-Subscribe [via RSS]({{ "/feed.xml" | prepend: site.baseurl }})
+<ul>
+{% for post in site.posts %}
+  {% include post_list_item.html date=post.date url=post.url title=post.title %}
+{% endfor %}
+</ul>

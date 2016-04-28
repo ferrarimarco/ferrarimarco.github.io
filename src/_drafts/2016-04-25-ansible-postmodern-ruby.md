@@ -1,13 +1,11 @@
 ---
 layout: post
 date: 2016-04-25
-title: Provisioning a Ruby Environment with Ansible
-categories: programming
+title: Setup a (postmodern) Ruby Environment with Ansible
+categories: development devops provisioning
 tags:
-  - devops
-  - provisioning
-  - configuration-management
   - ansible
+  - ruby
 ---
 
 Placeholder content
