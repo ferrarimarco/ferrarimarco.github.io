@@ -14,11 +14,18 @@ layout: default
 
   <div class="post-footer post-meta">
     {% if page.categories.size > 0 %}
-      <p>Categories: {{ page.categories | sort | join: ", "  }}</p>
+      <p>Categories:
+      {% for category in page.categories %}
+        <a href="{{ site.jekyll-archives.permalinks.category | replace: ':name', category }}">{{ category }}</a>
+      {% endfor %}
+      </p>
     {% endif %}
     {% if page.tags.size > 0 %}
-      <p>Tags: {{ page.tags | sort | join: ", "  }}</p>
-      <a href="{{ site.jekyll-archives.permalinks.tag | replace: ':name', 'tag_placeholder'}}">aaaa</href>
+      <p>Tags:
+      {% for tag in page.tags %}
+        <a href="{{ site.jekyll-archives.permalinks.tag | replace: ':name', tag }}">{{ tag }}</a>
+      {% endfor %}
+      </p>
     {% endif %}
 
   </div>
