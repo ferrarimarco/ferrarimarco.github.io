@@ -14,27 +14,23 @@ layout: default
     {{ content }}
   </div>
 
-  {% if page.categories.size > 0 or page.tags.size > 0 %}
   <div class="post-footer post-meta">
-    {% if page.categories.size > 0 %}
-      <p>Categories:
-      {% for category in page.categories %}
-        <a href="{{ site.jekyll-archives.permalinks.category | replace: ':name', category }}">{{ category }}</a>
-      {% endfor %}
-      </p>
-    {% endif %}
-    {% if page.tags.size > 0 %}
-      <p>Tags:
-      {% for tag in page.tags %}
-        <a href="{{ site.jekyll-archives.permalinks.tag | replace: ':name', tag }}">{{ tag }}</a>
-      {% endfor %}
-      </p>
-    {% endif %}
+  {% if page.categories.size > 0 %}
+    <p>Categories:
+    {% for category in page.categories %}
+      <a href="{{ site.jekyll-archives.permalinks.category | replace: ':name', category }}">{{ category }}</a>
+    {% endfor %}
+    </p>
+  {% endif %}
+  {% if page.tags.size > 0 %}
+    <p>Tags:
+    {% for tag in page.tags %}
+      <a href="{{ site.jekyll-archives.permalinks.tag | replace: ':name', tag }}">{{ tag }}</a>
+    {% endfor %}
+    </p>
   {% endif %}
 
-  {% if page.include_rss_link %}
     <p>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-  {% endif %}
   </div>
 
 </article>

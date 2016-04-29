@@ -2,7 +2,6 @@
 layout: post
 title: Blog
 permalink: /blog/
-include_rss_link: true
 additional_css_classes: "post-list"
 ---
 
