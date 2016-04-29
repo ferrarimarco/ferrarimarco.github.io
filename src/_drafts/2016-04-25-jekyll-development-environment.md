@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2016-04-25
-title: An Automatically-provisioned Development Environment for Jekyll
+title: Provision a Development Environment for Jekyll with Ansible
 categories: development devops provisioning
 tags:
   - ansible
@@ -9,4 +9,5 @@ tags:
   - vagrant
 ---
 
-Placeholder content
+Having switched to the very user-friendly Github pages to host this website,
+I started to look into a solution to manage content. And I stumbled upon Jekyll.
