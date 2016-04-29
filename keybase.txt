@@ -1,0 +1,73 @@
+==================================================================
+https://keybase.io/ferrarimarco
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ferrarimarco.info
+  * I am ferrarimarco (https://keybase.io/ferrarimarco) on keybase.
+  * I have a public key with fingerprint EA60 05CE 654B 00FD 68E7  9069 F764 7B33 709E 13C4
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "ea6005ce654b00fd68e79069f7647b33709e13c4",
+            "host": "keybase.io",
+            "key_id": "f7647b33709e13c4",
+            "kid": "0101bb7c18b11920a05391d088b9098d10321110ad4a3469e6818e36642bab605cdc0a",
+            "uid": "93f9dbca7196c55658eedd9d4c76cf00",
+            "username": "ferrarimarco"
+        },
+        "revoke": {
+            "sig_ids": [
+                "dfcf27e9d8caea964f9b0d0191d1ee9f7df1f8631b3af822afad83341c2376320f"
+            ]
+        },
+        "service": {
+            "hostname": "ferrarimarco.info",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1438066280,
+    "expire_in": 157680000,
+    "prev": "b1c8be5343b0738de1e3e3b84d9e62f414c74e0638325aa75e1cdba2558ee218",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.20
+Comment: https://keybase.io/crypto
+
+yMJoAnicbZJdaFRHGIY3abTt2mharIZqQAabUknNzJlz5szZClqsF70xSBMrcWU7
+P99JDmn2rGc3a0KISCl6o1II1KAXBUnSaGwbU0HsjzRRC80PRCtetBFt6U8CtZS2
+Lga07Zygd87NMPO988w773yXK59IJMvSN0pNx6K16bLJsYGORNP52tZuJEPdhVLd
+qA0WJz/ItkCUi4JsAaUQCIaxo4A5tsTY14yD62Hm+S6zXUmpiz0gVNmoDrWG+fiE
+wUiRh41BaPbMIhNos/sYfdtiARNMpHQV4ZIQz8ICO9QjGnMuPexxTTC1CCFYaFtQ
+m3nAOOFAGbMtKSQz3rTCwuA6FnEe9T0tlXCJx5TjMIcDaO1pW7lM+RjHwjxEWdEO
+sSuIIhEF7SJSIeqpQxEUwzaIU8gHLcZ4HqV2I+0r33LB01wJEB6zfU9ijYlxSQBM
+EtonPmeUSCp8blnCF5pTahNlUZdRC/toj2GbW4uBWoTHST3GwcYg68eh5aKwEKrw
+HVNuLRRyqdhZoSsXy/eBzDwEZWSQ1eavzIEiRPkgzKIUMUpVCGIysSnHjFkc1yHo
+zAURZIJY4biMYzPia6BokJIoLsGhNpXYpVwDAQpUclubrC3fJiY6GzCjnFqOEK4D
+RGkpLCeO1iIcxU/bmw1RyjE2RYtBmvCyotARAeoZ/zpdkShLJpYuKY+7LZF8uupR
+Dyamn3ywpvOXHQ3lauJKsxrtv/3tZ1sujvTUl6f/qOzTnd01Q8MbPh0fOjk3dWRh
+YnjZ9YaxdWfvXXv7mZnrpy5Dz+Hnbuyu6T2+ZbaqcfKlgf6VpfrWpvnB7RuSvbON
+t/8ZLm7+5uJc7YeH3/hyuvflS7feXLF1/6Wq830PttP7S/5a89Xn65uTFdvqP/pv
+emiheuGLka70Wx9ceO9Q5e+7uv9OzZxQUzWjLxx5vmHTHNcl9uyxc9A4erfvz8HT
+c7+NPdV1/N2DA8tPHt1Vd2f1+I/VZyv+LX2X+flC76Yfpl7cOXp0Yv7XQ9/Xdhx4
+v72Bfjy2au0rr87vuflJ6cw5z78zM1lNloU/vdbWvPLK61fvz/4PGGxOxQ==
+=wzlU
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ferrarimarco
+
+==================================================================
