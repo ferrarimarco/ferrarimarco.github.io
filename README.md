@@ -1,7 +1,7 @@
 # personal-website
 This is the source code of my personal website: http://ferrarimarco.info
 
-It was scaffolded with [Yeoman](http://yeoman.io/) using [generator-webapp]([https://github.com/yeoman/generator-jekyllized]).
+It was scaffolded with [Yeoman](http://yeoman.io/) using [generator-jekyllized](https://github.com/yeoman/generator-jekyllized).
 
 ## Dependencies
 Check the [package.json](../blob/master/package.json) descriptor. you basically need:
