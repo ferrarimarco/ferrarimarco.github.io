@@ -8856,15 +8856,11 @@ section.about-us.toTop {
     -ms-transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
-    border-color: #335151;
-    color: #335151;
   }
 }
 @media (max-width: 767px) {
   /* line 542, ../sass/partials/_layout.scss */
   .the-groom button:hover {
-    background-color: #335151;
-    color: white;
   }
 }
 
