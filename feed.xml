@@ -1,1 +1,101 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.1.6">Jekyll</generator><link href="http://ferrarimarco.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://ferrarimarco.info/" rel="alternate" type="text/html" /><updated>2016-07-07T15:56:09+00:00</updated><id>http://ferrarimarco.info/</id><title>Marco Ferrari - software engineer</title><subtitle>Personal website of Marco Ferrari</subtitle><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>http://ferrarimarco.info</uri></author></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.1">Jekyll</generator><link href="http://ferrarimarco.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://ferrarimarco.info/" rel="alternate" type="text/html" /><updated>2017-07-27T09:24:29+00:00</updated><id>http://ferrarimarco.info/</id><title type="html">Marco Ferrari - software engineer</title><subtitle>Personal website of Marco Ferrari</subtitle><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>http://ferrarimarco.info</uri></author><entry><title type="html">An Automatically Configured Development Box</title><link href="http://ferrarimarco.info/blog/development/devops/configuration/2017/07/26/open-development-environment-devbox/" rel="alternate" type="text/html" title="An Automatically Configured Development Box" /><published>2017-07-26T00:00:00+00:00</published><updated>2017-07-26T00:00:00+00:00</updated><id>http://ferrarimarco.info/blog/development/devops/configuration/2017/07/26/open-development-environment-devbox</id><content type="html" xml:base="http://ferrarimarco.info/blog/development/devops/configuration/2017/07/26/open-development-environment-devbox/">&lt;p&gt;In the past months I was assigned a new task at work, that essentially boiled
+down to this question: &lt;em&gt;how can we simplify the deployment of new development
+workstations?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In my development team at the time, we were tired of repeating the same (mostly
+manual and not documented) steps. The configuration process resulted in
+different development environment leading to confusion (it works on my machine!)
+and deployment issues.&lt;/p&gt;
+
+&lt;h2 id=&quot;baseline&quot;&gt;Baseline&lt;/h2&gt;
+
+&lt;p&gt;We were in the situation where each developer, depending on his/her experience,
+installed and configured a set of development tools at his/her own will.
+This process was largely undocumented (READMEs were Holy Grails) and led to all
+sort of environment disparity issues. Moreover the configuration could not be
+easily changed because of the fear of breaking something. For the same reason
+no one actually bothered to install upgrades for such tools (we had
+someone who was stuck on a 3-years-ago Eclipse version!).&lt;/p&gt;
+
+&lt;h2 id=&quot;list-of-requirements&quot;&gt;List of Requirements&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Automated Setup: there must be no manual steps involved in the setup of a
+workstation&lt;/li&gt;
+  &lt;li&gt;Versioning: the configuration should be stored in a Version Control System&lt;/li&gt;
+  &lt;li&gt;Reproducibility: the setup process of a new workstation should be easily
+reproducible&lt;/li&gt;
+  &lt;li&gt;Environments should be ephemeral: each instance should be easily created and
+destroyed without any loss of configuration&lt;/li&gt;
+  &lt;li&gt;Minimize the time needed to spin up a new instance&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;research&quot;&gt;Research&lt;/h2&gt;
+
+&lt;p&gt;After some research, I could not find a out-of-the-box solution or even a set of
+established best practices to follow. Everyone was (is?) focusing on
+&lt;em&gt;development environments&lt;/em&gt; and not on the configuration process of the
+development tools.&lt;/p&gt;
+
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;This solution (&lt;a href=&quot;https://github.com/ferrarimarco/open-development-environment-devbox&quot;&gt;ferrarimarco/open-development-environment-devbox&lt;/a&gt;) is a
+process that produces a packaged machine with the needed tools already installed
+and ready to be used. For a list of the available tools refer to the README in
+&lt;a href=&quot;https://github.com/ferrarimarco/open-development-environment-devbox&quot;&gt;ferrarimarco/open-development-environment-devbox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some of the included tools run inside &lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt; containers to ease and speed up the
+setup and deployment.&lt;/p&gt;
+
+&lt;h3 id=&quot;build&quot;&gt;Build&lt;/h3&gt;
+
+&lt;p&gt;To automate the creation of images for various platforms I implemented a
+&lt;a href=&quot;https://www.packer.io&quot;&gt;Packer&lt;/a&gt; template to execute the following tasks:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Provision a new machine&lt;/li&gt;
+  &lt;li&gt;Start the new machine&lt;/li&gt;
+  &lt;li&gt;Install the Operating System&lt;/li&gt;
+  &lt;li&gt;Configure the running instance by running provisioning tools&lt;/li&gt;
+  &lt;li&gt;Package the machine&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I chose Packer because it let me write a recipe (a single JSON file called
+&lt;em&gt;template&lt;/em&gt;) to provision and configure the machine in a totally
+automated way. I just run the &lt;code class=&quot;highlighter-rouge&quot;&gt;packer build&lt;/code&gt; command to start the build process.&lt;/p&gt;
+
+&lt;p&gt;The other interesting Packer feature is that you can use multiple providers (
+different hypervisors and/or cloud providers), multiple configuration methods (
+shell scripts, &lt;a href=&quot;https://www.ansible.com/&quot;&gt;Ansible&lt;/a&gt; playbooks, Chef recipes, etc.) and different post
+processors to package the created images. This gives you maximum deployment
+flexibility (i.e. start with a local virtualized environment and move to a cloud
+based one in the future).&lt;/p&gt;
+
+&lt;p&gt;I chose to run the configuration process while building the image so I had to
+execute this process only once per build and not every time an instance is
+started.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuration&quot;&gt;Configuration&lt;/h3&gt;
+
+&lt;p&gt;The configuration process was implemented by developing a set of &lt;a href=&quot;https://www.ansible.com/&quot;&gt;Ansible&lt;/a&gt; roles.
+I decided to use a dedicated configuration tool (&lt;a href=&quot;https://www.ansible.com/&quot;&gt;Ansible&lt;/a&gt;) instead of writing
+shell scripts to avoid the complexity of ensuring the compatibility of such
+scripts across multiple platforms. I also benefited from the built-in node
+management mechanisms that these dedicated tools implement out-of-the-box.&lt;/p&gt;
+
+&lt;p&gt;The adoption of this kind of tools has the added plus of letting you reuse your
+code on different platforms (Virtual Machines, Physical Machines) without much
+effort. You just need to tell to such tools where your instances are and they
+will do the rest.&lt;/p&gt;
+
+&lt;h3 id=&quot;deployment&quot;&gt;Deployment&lt;/h3&gt;
+
+&lt;p&gt;For now I deployed instances of this Development Box in two ways:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Virtual Machines managed with &lt;a href=&quot;https://www.vagrantup.com&quot;&gt;Vagrant&lt;/a&gt; to manage
+the life cycle of each instance. You can bring up a new instance in matter of
+seconds with just &lt;code class=&quot;highlighter-rouge&quot;&gt;vagrant up&lt;/code&gt; command;&lt;/li&gt;
+  &lt;li&gt;Physical machines, by applying the same set of &lt;a href=&quot;https://www.ansible.com/&quot;&gt;Ansible&lt;/a&gt; roles to a given
+host. In this case &lt;a href=&quot;https://www.vagrantup.com&quot;&gt;Vagrant&lt;/a&gt; can be used as a development environment before
+applying any role to the production node.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>http://ferrarimarco.info</uri></author><category term="ansible" /><category term="docker" /><category term="vagrant" /><summary type="html">In the past months I was assigned a new task at work, that essentially boiled down to this question: how can we simplify the deployment of new development workstations? In my development team at the time, we were tired of repeating the same (mostly manual and not documented) steps. The configuration process resulted in different development environment leading to confusion (it works on my machine!) and deployment issues. Baseline We were in the situation where each developer, depending on his/her experience, installed and configured a set of development tools at his/her own will. This process was largely undocumented (READMEs were Holy Grails) and led to all sort of environment disparity issues. Moreover the configuration could not be easily changed because of the fear of breaking something. For the same reason no one actually bothered to install upgrades for such tools (we had someone who was stuck on a 3-years-ago Eclipse version!). List of Requirements Automated Setup: there must be no manual steps involved in the setup of a workstation Versioning: the configuration should be stored in a Version Control System Reproducibility: the setup process of a new workstation should be easily reproducible Environments should be ephemeral: each instance should be easily created and destroyed without any loss of configuration Minimize the time needed to spin up a new instance Research After some research, I could not find a out-of-the-box solution or even a set of established best practices to follow. Everyone was (is?) focusing on development environments and not on the configuration process of the development tools. Solution This solution (ferrarimarco/open-development-environment-devbox) is a process that produces a packaged machine with the needed tools already installed and ready to be used. For a list of the available tools refer to the README in ferrarimarco/open-development-environment-devbox. Some of the included tools run inside Docker containers to ease and speed up the setup and deployment. Build To automate the creation of images for various platforms I implemented a Packer template to execute the following tasks: Provision a new machine Start the new machine Install the Operating System Configure the running instance by running provisioning tools Package the machine I chose Packer because it let me write a recipe (a single JSON file called template) to provision and configure the machine in a totally automated way. I just run the packer build command to start the build process. The other interesting Packer feature is that you can use multiple providers ( different hypervisors and/or cloud providers), multiple configuration methods ( shell scripts, Ansible playbooks, Chef recipes, etc.) and different post processors to package the created images. This gives you maximum deployment flexibility (i.e. start with a local virtualized environment and move to a cloud based one in the future). I chose to run the configuration process while building the image so I had to execute this process only once per build and not every time an instance is started. Configuration The configuration process was implemented by developing a set of Ansible roles. I decided to use a dedicated configuration tool (Ansible) instead of writing shell scripts to avoid the complexity of ensuring the compatibility of such scripts across multiple platforms. I also benefited from the built-in node management mechanisms that these dedicated tools implement out-of-the-box. The adoption of this kind of tools has the added plus of letting you reuse your code on different platforms (Virtual Machines, Physical Machines) without much effort. You just need to tell to such tools where your instances are and they will do the rest. Deployment For now I deployed instances of this Development Box in two ways: Virtual Machines managed with Vagrant to manage the life cycle of each instance. You can bring up a new instance in matter of seconds with just vagrant up command; Physical machines, by applying the same set of Ansible roles to a given host. In this case Vagrant can be used as a development environment before applying any role to the production node.</summary></entry></feed>
