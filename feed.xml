@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://ferrarimarco.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://ferrarimarco.info/" rel="alternate" type="text/html" /><updated>2017-10-19T08:03:54+00:00</updated><id>http://ferrarimarco.info/</id><title type="html">Marco Ferrari - software engineer</title><subtitle>Personal website of Marco Ferrari</subtitle><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>http://ferrarimarco.info</uri></author><entry><title type="html">Unlocking an Android Smartphone with a Known Pattern Lock via ADB</title><link href="http://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/" rel="alternate" type="text/html" title="Unlocking an Android Smartphone with a Known Pattern Lock via ADB" /><published>2017-10-18T00:00:00+00:00</published><updated>2017-10-18T00:00:00+00:00</updated><id>http://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern</id><content type="html" xml:base="http://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/">&lt;p&gt;Recently my &lt;a href=&quot;https://en.wikipedia.org/wiki/Nexus_4&quot;&gt;Nexus 4&lt;/a&gt; touchscreen stopped
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://ferrarimarco.info/feed.xml" rel="self" type="application/atom+xml" /><link href="http://ferrarimarco.info/" rel="alternate" type="text/html" /><updated>2017-10-20T12:54:47+00:00</updated><id>http://ferrarimarco.info/</id><title type="html">Marco Ferrari - software engineer</title><subtitle>Personal website of Marco Ferrari</subtitle><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>http://ferrarimarco.info</uri></author><entry><title type="html">Unlocking an Android Smartphone with a Known Pattern Lock via ADB</title><link href="http://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/" rel="alternate" type="text/html" title="Unlocking an Android Smartphone with a Known Pattern Lock via ADB" /><published>2017-10-18T00:00:00+00:00</published><updated>2017-10-18T00:00:00+00:00</updated><id>http://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern</id><content type="html" xml:base="http://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/">&lt;p&gt;Recently my &lt;a href=&quot;https://en.wikipedia.org/wiki/Nexus_4&quot;&gt;Nexus 4&lt;/a&gt; touchscreen stopped
 working.&lt;/p&gt;
 
 &lt;p&gt;I wasn’t worried at all because I set up an automatic backup schedule with
@@ -191,7 +191,7 @@ first have to know the coordinates of the points to touch. After that you need
 to unlock the device, swipe up to reach the pattern lockscreen and then swipe
 the pattern.&lt;/p&gt;
 
-&lt;h1 id=&quot;get-the-coordinates-of-the-pattern-lock-points&quot;&gt;Get the Coordinates of the Pattern Lock Points&lt;/h1&gt;
+&lt;h2 id=&quot;get-the-coordinates-of-the-pattern-lock-points&quot;&gt;Get the Coordinates of the Pattern Lock Points&lt;/h2&gt;
 
 &lt;p&gt;To get the X and Y coordinates of the points to touch you should:&lt;/p&gt;
 &lt;ol&gt;
@@ -221,7 +221,7 @@ numeral system&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Now you have the X and Y for each one of the nine points of the pattern lock.&lt;/p&gt;
 
-&lt;h1 id=&quot;run-the-pattern-script&quot;&gt;Run the Pattern Script&lt;/h1&gt;
+&lt;h2 id=&quot;run-the-pattern-script&quot;&gt;Run the Pattern Script&lt;/h2&gt;
 
 &lt;p&gt;Before developing my own script I found an existing implementation on GitHub.
 &lt;a href=&quot;https://github.com/ferrarimarco/android-pattern-unlock&quot;&gt;I forked that project&lt;/a&gt;
