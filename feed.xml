@@ -1,4 +1,180 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.1">Jekyll</generator><link href="https://ferrarimarco.info/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ferrarimarco.info/" rel="alternate" type="text/html" /><updated>2018-05-10T07:36:51+00:00</updated><id>https://ferrarimarco.info/</id><title type="html">Marco Ferrari - software engineer</title><subtitle>Personal website of Marco Ferrari</subtitle><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>https://ferrarimarco.info</uri></author><entry><title type="html">Unlocking an Android Smartphone with a Known Pattern Lock via ADB</title><link href="https://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/" rel="alternate" type="text/html" title="Unlocking an Android Smartphone with a Known Pattern Lock via ADB" /><published>2017-10-18T00:00:00+00:00</published><updated>2017-10-18T00:00:00+00:00</updated><id>https://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern</id><content type="html" xml:base="https://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/">&lt;p&gt;Recently my &lt;a href=&quot;https://en.wikipedia.org/wiki/Nexus_4&quot;&gt;Nexus 4&lt;/a&gt; touchscreen stopped
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.1">Jekyll</generator><link href="https://ferrarimarco.info/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ferrarimarco.info/" rel="alternate" type="text/html" /><updated>2018-05-10T07:41:44+00:00</updated><id>https://ferrarimarco.info/</id><title type="html">Marco Ferrari - software engineer</title><subtitle>Personal website of Marco Ferrari</subtitle><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>https://ferrarimarco.info</uri></author><entry><title type="html">Bootstrapping a Cluster on Google Cloud with Terraform</title><link href="https://ferrarimarco.info/blog/cloud/2018/05/09/google-cloud-engine-free-terraform/" rel="alternate" type="text/html" title="Bootstrapping a Cluster on Google Cloud with Terraform" /><published>2018-05-09T00:00:00+00:00</published><updated>2018-05-09T00:00:00+00:00</updated><id>https://ferrarimarco.info/blog/cloud/2018/05/09/google-cloud-engine-free-terraform</id><content type="html" xml:base="https://ferrarimarco.info/blog/cloud/2018/05/09/google-cloud-engine-free-terraform/">&lt;p&gt;Recently I had to evaluate cloud computing offers for a new project.
+I started with &lt;a href=&quot;https://cloud.google.com/&quot;&gt;Google Cloud Platform&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;google-cloud-free-tier&quot;&gt;Google Cloud: Free Tier&lt;/h1&gt;
+
+&lt;p&gt;For my evaluation goals the &lt;a href=&quot;https://cloud.google.com/free&quot;&gt;always-free tier&lt;/a&gt;
+was enough.&lt;/p&gt;
+
+&lt;p&gt;This free tier has many perks (at IaaS and PaaS), but for this exercise we will use:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1x free &lt;a href=&quot;https://cloud.google.com/compute/docs/machine-types#sharedcore&quot;&gt;f1-micro&lt;/a&gt; VM on &lt;a href=&quot;https://cloud.google.com/compute/?hl=it&quot;&gt;Compute Engine&lt;/a&gt; with 30GB of disk space&lt;/li&gt;
+  &lt;li&gt;5GB of Google Cloud Storage&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;goals&quot;&gt;Goals&lt;/h1&gt;
+
+&lt;p&gt;We are going to bootstrap a 1-VM cluster on Google Cloud Compute Engine using &lt;a href=&quot;https://www.terraform.io/&quot;&gt;Terraform&lt;/a&gt;.
+The VM will have a 30GB hard disk.&lt;/p&gt;
+
+&lt;h2 id=&quot;terraform&quot;&gt;Terraform&lt;/h2&gt;
+
+&lt;p&gt;Terraform is tool to automate the provision of cloud infrastructures.
+Basically it translate a descriptor (&lt;a href=&quot;https://www.terraform.io/docs/configuration/&quot;&gt;Configurations&lt;/a&gt; in Terraform jargon) in calls to the chosen cloud provider API.
+The fancy name for this management process is &lt;a href=&quot;https://en.wikipedia.org/wiki/Infrastructure_as_Code&quot;&gt;“Infrastructure as Code”&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;infrastructure-as-code&quot;&gt;Infrastructure as Code&lt;/h2&gt;
+
+&lt;p&gt;Why should you describe your infrastructure with code?
+For three reasons:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;It will be auditable: you know what’s in there&lt;/li&gt;
+  &lt;li&gt;It can be versioned: you can control the changes&lt;/li&gt;
+  &lt;li&gt;It can automatically processed: there are tools that can process your infrastructure descriptors and automatically apply changes&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;terraform-configurations&quot;&gt;Terraform Configurations&lt;/h1&gt;
+
+&lt;p&gt;The whole project is available on GitHub: &lt;a href=&quot;https://github.com/ferrarimarco/google-cloud-playground&quot;&gt;ferrarimarco/google-cloud-playground&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Being this a really simple infrastructure, we used just three configurations&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Resources: &lt;a href=&quot;https://github.com/ferrarimarco/google-cloud-playground/blob/master/terraform/gce.tf&quot;&gt;gce.tf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Outputs: &lt;a href=&quot;https://github.com/ferrarimarco/google-cloud-playground/blob/master/terraform/outputs.tf&quot;&gt;outputs.tf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Variables: &lt;a href=&quot;https://github.com/ferrarimarco/google-cloud-playground/blob/master/terraform/variables.tf&quot;&gt;variables.tf&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;p&gt;In this configuration we define the following resources:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;A &lt;a href=&quot;https://www.terraform.io/docs/backends/index.html&quot;&gt;backend&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Default provider credentials&lt;/li&gt;
+  &lt;li&gt;A reginal Google Compute Engine IP Address&lt;/li&gt;
+  &lt;li&gt;A Virtual Machine&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;backend&quot;&gt;Backend&lt;/h3&gt;
+
+&lt;p&gt;A backend is needed to share the Terraform &lt;a href=&quot;https://www.terraform.io/docs/state/index.html&quot;&gt;state&lt;/a&gt;, if you want to collaborate with others on the management activities of the infrastructure. You could avoid setting up a backend (Terraform will use a local backend by default), but then you need to deal with the inevitable merging conflicts due to Terraform executions by different users. I configured it because with a remote backend I’m able to
+modify my infrastructure from any workstation.&lt;/p&gt;
+
+&lt;p&gt;To keep this in the same infrastructure, I manually created a Google Cloud Storage bucket and configured it in the resources configuration as:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;terraform {
+  backend &quot;gcs&quot; {
+    credentials = &quot;account.json&quot;
+    prefix  = &quot;terraform/state&quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;where &lt;code class=&quot;highlighter-rouge&quot;&gt;account.json&lt;/code&gt; is a credential file created as described in the &lt;a href=&quot;https://github.com/ferrarimarco/google-cloud-playground&quot;&gt;README&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;default-provider-configuration&quot;&gt;Default Provider Configuration&lt;/h3&gt;
+
+&lt;p&gt;These are the default settings that we configured for the Google Cloud provider. Can be overridden by other resources.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;provider &quot;google&quot; {
+  credentials = &quot;${file(&quot;account.json&quot;)}&quot;
+  project     = &quot;${var.project_id}&quot;
+  region = &quot;us-east1&quot;
+  zone = &quot;us-east1-b&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note the use of variables (&lt;code class=&quot;highlighter-rouge&quot;&gt;${}&lt;/code&gt;). We’ll explain this later.&lt;/p&gt;
+
+&lt;h3 id=&quot;google-compute-engine-ip-address-and-vm&quot;&gt;Google Compute Engine: IP Address and VM&lt;/h3&gt;
+
+&lt;p&gt;Now let’s get to the meat: the Virtual Machine and its public IP address. The syntax is straightforward.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;google_compute_address&quot; &quot;regional-m1-ip&quot; {
+  name = &quot;regional-m1-ip&quot;
+}
+
+resource &quot;google_compute_instance&quot; &quot;gce-free-tier&quot; {
+  name = &quot;gce1&quot;
+  machine_type = &quot;f1-micro&quot;
+  tags = [&quot;free-tier&quot;]
+
+  boot_disk {
+    auto_delete = true
+    initialize_params {
+      image = &quot;ubuntu-os-cloud/ubuntu-1804-bionic-v20180426b&quot;
+      size = 30
+      type = &quot;pd-standard&quot;
+    }
+  }
+
+  metadata {
+    ssh-keys = &quot;${var.ssh_user}:${file(&quot;${var.public_key_path}&quot;)}&quot;
+  }
+
+  network_interface {
+    access_config {
+      nat_ip = &quot;${google_compute_address.regional-m1-ip.address}&quot;
+    }
+    subnetwork = &quot;default&quot;
+  }
+
+  service_account {
+    scopes = [
+      &quot;https://www.googleapis.com/auth/devstorage.read_only&quot;,
+      &quot;https://www.googleapis.com/auth/logging.write&quot;,
+      &quot;https://www.googleapis.com/auth/monitoring.write&quot;,
+      &quot;https://www.googleapis.com/auth/servicecontrol&quot;,
+      &quot;https://www.googleapis.com/auth/service.management.readonly&quot;,
+      &quot;https://www.googleapis.com/auth/trace.append&quot;
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A couple of notes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Terraform does not yet support &lt;a href=&quot;https://cloud.google.com/compute/docs/instances/managing-instance-access&quot;&gt;OS-Login&lt;/a&gt;. We are stuck with &lt;a href=&quot;https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys&quot;&gt;Metadata-based&lt;/a&gt; logins (hence the setup of metadata) in the configuration&lt;/li&gt;
+  &lt;li&gt;Region and image id should be parametrized with variables as well&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
+
+&lt;p&gt;With Terraform we can define the outputs of each &lt;code class=&quot;highlighter-rouge&quot;&gt;terraform apply&lt;/code&gt; run. In this case it’s useful to get, for each VM, its id public IP address so we can connect to continue with the configuration.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;output &quot;instances&quot; {
+  value = &quot;${join(&quot;,&quot;, google_compute_instance.gce-free-tier.*.instance_id, google_compute_instance.gce-free-tier.*.network_interface.0.address, google_compute_instance.gce-free-tier.*.network_interface.0.access_config.0.assigned_nat_ip)}&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;variables&quot;&gt;Variables&lt;/h2&gt;
+
+&lt;p&gt;To avoid hard coding values in the configuration, I used a separate file to define runtime variables that can be overridden if necessary:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;variable &quot;public_key_path&quot; {
+  description = &quot;Path to file containing public key&quot;
+  default     = &quot;~/.ssh/id_rsa_gcloud.pub&quot;
+}
+
+variable &quot;private_key_path&quot; {
+  description = &quot;Path to file containing private key&quot;
+  default     = &quot;~/.ssh/id_rsa_gcloud&quot;
+}
+
+variable &quot;project_id&quot; {
+  description = &quot;Google Cloud Project ID&quot;
+}
+
+variable &quot;ssh_user&quot; {
+  description = &quot;SSH User&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;I showed you how to automatically setup a completely free (but somewhat limited) 1-VM cluster in Google Cloud and Terraform.&lt;/p&gt;
+
+&lt;p&gt;Keep up with the updates in the &lt;a href=&quot;https://github.com/ferrarimarco/google-cloud-playground&quot;&gt;GitHub repository&lt;/a&gt;: I’m going to expand the cluster with more Google Cloud free tier perks.&lt;/p&gt;</content><author><name>Marco Ferrari</name><email>ferrari.marco@gmail.com</email><uri>https://ferrarimarco.info</uri></author><category term="google-cloud" /><category term="terraform" /><summary type="html">Recently I had to evaluate cloud computing offers for a new project. I started with Google Cloud Platform. Google Cloud: Free Tier For my evaluation goals the always-free tier was enough. This free tier has many perks (at IaaS and PaaS), but for this exercise we will use: 1x free f1-micro VM on Compute Engine with 30GB of disk space 5GB of Google Cloud Storage Goals We are going to bootstrap a 1-VM cluster on Google Cloud Compute Engine using Terraform. The VM will have a 30GB hard disk. Terraform Terraform is tool to automate the provision of cloud infrastructures. Basically it translate a descriptor (Configurations in Terraform jargon) in calls to the chosen cloud provider API. The fancy name for this management process is “Infrastructure as Code”. Infrastructure as Code Why should you describe your infrastructure with code? For three reasons: It will be auditable: you know what’s in there It can be versioned: you can control the changes It can automatically processed: there are tools that can process your infrastructure descriptors and automatically apply changes Terraform Configurations The whole project is available on GitHub: ferrarimarco/google-cloud-playground Being this a really simple infrastructure, we used just three configurations Resources: gce.tf Outputs: outputs.tf Variables: variables.tf Resources In this configuration we define the following resources: A backend Default provider credentials A reginal Google Compute Engine IP Address A Virtual Machine Backend A backend is needed to share the Terraform state, if you want to collaborate with others on the management activities of the infrastructure. You could avoid setting up a backend (Terraform will use a local backend by default), but then you need to deal with the inevitable merging conflicts due to Terraform executions by different users. I configured it because with a remote backend I’m able to modify my infrastructure from any workstation. To keep this in the same infrastructure, I manually created a Google Cloud Storage bucket and configured it in the resources configuration as: terraform { backend &quot;gcs&quot; { credentials = &quot;account.json&quot; prefix = &quot;terraform/state&quot; } } where account.json is a credential file created as described in the README. Default Provider Configuration These are the default settings that we configured for the Google Cloud provider. Can be overridden by other resources. provider &quot;google&quot; { credentials = &quot;${file(&quot;account.json&quot;)}&quot; project = &quot;${var.project_id}&quot; region = &quot;us-east1&quot; zone = &quot;us-east1-b&quot; } Note the use of variables (${}). We’ll explain this later. Google Compute Engine: IP Address and VM Now let’s get to the meat: the Virtual Machine and its public IP address. The syntax is straightforward. resource &quot;google_compute_address&quot; &quot;regional-m1-ip&quot; { name = &quot;regional-m1-ip&quot; } resource &quot;google_compute_instance&quot; &quot;gce-free-tier&quot; { name = &quot;gce1&quot; machine_type = &quot;f1-micro&quot; tags = [&quot;free-tier&quot;] boot_disk { auto_delete = true initialize_params { image = &quot;ubuntu-os-cloud/ubuntu-1804-bionic-v20180426b&quot; size = 30 type = &quot;pd-standard&quot; } } metadata { ssh-keys = &quot;${var.ssh_user}:${file(&quot;${var.public_key_path}&quot;)}&quot; } network_interface { access_config { nat_ip = &quot;${google_compute_address.regional-m1-ip.address}&quot; } subnetwork = &quot;default&quot; } service_account { scopes = [ &quot;https://www.googleapis.com/auth/devstorage.read_only&quot;, &quot;https://www.googleapis.com/auth/logging.write&quot;, &quot;https://www.googleapis.com/auth/monitoring.write&quot;, &quot;https://www.googleapis.com/auth/servicecontrol&quot;, &quot;https://www.googleapis.com/auth/service.management.readonly&quot;, &quot;https://www.googleapis.com/auth/trace.append&quot; ] } } A couple of notes: Terraform does not yet support OS-Login. We are stuck with Metadata-based logins (hence the setup of metadata) in the configuration Region and image id should be parametrized with variables as well Outputs With Terraform we can define the outputs of each terraform apply run. In this case it’s useful to get, for each VM, its id public IP address so we can connect to continue with the configuration. output &quot;instances&quot; { value = &quot;${join(&quot;,&quot;, google_compute_instance.gce-free-tier.*.instance_id, google_compute_instance.gce-free-tier.*.network_interface.0.address, google_compute_instance.gce-free-tier.*.network_interface.0.access_config.0.assigned_nat_ip)}&quot; } Variables To avoid hard coding values in the configuration, I used a separate file to define runtime variables that can be overridden if necessary: variable &quot;public_key_path&quot; { description = &quot;Path to file containing public key&quot; default = &quot;~/.ssh/id_rsa_gcloud.pub&quot; } variable &quot;private_key_path&quot; { description = &quot;Path to file containing private key&quot; default = &quot;~/.ssh/id_rsa_gcloud&quot; } variable &quot;project_id&quot; { description = &quot;Google Cloud Project ID&quot; } variable &quot;ssh_user&quot; { description = &quot;SSH User&quot; } Conclusions I showed you how to automatically setup a completely free (but somewhat limited) 1-VM cluster in Google Cloud and Terraform. Keep up with the updates in the GitHub repository: I’m going to expand the cluster with more Google Cloud free tier perks.</summary></entry><entry><title type="html">Unlocking an Android Smartphone with a Known Pattern Lock via ADB</title><link href="https://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/" rel="alternate" type="text/html" title="Unlocking an Android Smartphone with a Known Pattern Lock via ADB" /><published>2017-10-18T00:00:00+00:00</published><updated>2017-10-18T00:00:00+00:00</updated><id>https://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern</id><content type="html" xml:base="https://ferrarimarco.info/blog/mobile/security/2017/10/18/unlocking-android-pattern/">&lt;p&gt;Recently my &lt;a href=&quot;https://en.wikipedia.org/wiki/Nexus_4&quot;&gt;Nexus 4&lt;/a&gt; touchscreen stopped
 working.&lt;/p&gt;
 
 &lt;p&gt;I wasn’t worried at all because I set up an automatic backup schedule with
