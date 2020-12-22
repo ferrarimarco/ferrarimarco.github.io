@@ -1,6 +1,4 @@
-# personal-website
-
-[![Build Status](https://travis-ci.com/ferrarimarco/personal-website.svg?branch=master)](https://travis-ci.com/ferrarimarco/personal-website)
+# Personal Website
 
 This is the source code of my personal website: <https://ferrarimarco.info>
 
