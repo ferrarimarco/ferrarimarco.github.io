@@ -1,0 +1,22 @@
+<header class="site-header">
+
+  <div class="wrapper">
+    <!--[if lt IE 11]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
+
+    <nav class="site-nav">
+      <div class="trigger">
+        {% for my_page in site.pages %}
+          {% unless my_page.url contains "404" or my_page.url contains "feed.xml" or my_page.url contains "archive" or my_page.url contains "sitemap.xml" or my_page.url == "/" %}
+            <a class="page-link" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </nav>
+
+  </div>
+
+</header>

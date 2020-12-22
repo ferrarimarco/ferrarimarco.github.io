@@ -1,0 +1,45 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% if page.type == 'tag' or page.type == 'category' %}
+  {% capture page_title %}Archive of posts with {{ page.type }} '{{ page.title }}'{% endcapture %}
+  {% elsif page.type == 'year' %}
+  {% capture page_title %}Archive of posts from {{ page.date | date: site.date_format_year }}{% endcapture %}
+  {% elsif page.type == 'month' %}
+  {% capture page_title %}Archive of posts from {{ page.date | date: site.date_format_year_month }}{% endcapture %}
+  {% endif %}
+
+  <title>{{ site.title | escape }}
+    {% if page_title or page.title %}
+    {{ site.page_title_separator }}
+    {% if page_title %}
+    {{ page_title | escape }}
+    {% elsif page.title %}
+    {{ page.title | escape }}
+    {% endif %}
+    {% endif %}
+  </title>
+  <meta name="description"
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+  <!-- CSS -->
+  <!-- inject:css -->
+  <!-- endinject -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/touch/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- RSS -->
+  {% feed_meta %}
+
+  <!-- SEO -->
+  {% seo %}
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto" rel="stylesheet" type="text/css">
+</head>

@@ -1,0 +1,102 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Contacts</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <ul class="contact-list">
+          <li>{{ site.author.name }}
+            {% if site.author.cv_urls %}
+            - CV:
+            {% assign cv_urls = site.author.cv_urls %}
+            {% for url in cv_urls %}
+            <a href="{{ url.url }}" class="bold">{{ url.language }} </a>
+            {% endfor %}
+            {% endif %}
+          </li>
+          {% if site.author.email %}
+          <li>
+            <a href="mailto:{{ site.author.email }}">
+              <span class="icon">
+                <img alt="email icon" src="/assets/images/contacts/email.png" />
+              </span>
+              <span class="username">Email: {{ site.author.email }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% if site.author.github %}
+          <li>
+            <a href="https://github.com/{{ site.author.github }}" rel="me">
+              <span class="icon">
+                <img alt="github logo" src="/assets/images/contacts/github.png" />
+              </span>
+              <span class="username">Github: {{ site.author.github }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% if site.author.facebook %}
+          <li>
+            <a href="https://www.facebook.com/{{ site.author.facebook }}" rel="me">
+              <span class="icon">
+                <img alt="facebook logo" src="/assets/images/contacts/facebook.png" />
+              </span>
+              <span class="username">Facebook: {{ site.author.facebook }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% if site.author.twitter %}
+          <li>
+            <a href="https://twitter.com/{{ site.author.twitter }}" rel="me">
+              <span class="icon">
+                <img alt="twitter logo" src="/assets/images/contacts/twitter.png" />
+              </span>
+              <span class="username">Twitter: @{{ site.author.twitter }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% if site.author.linkedin %}
+          <li>
+            <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" rel="me" data-proofer-ignore>
+              <span class="icon">
+                <img alt="linkedin logo" src="/assets/images/contacts/linkedin.png" />
+              </span>
+              <span class="username">Linkedin: {{ site.author.linkedin }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% if site.author.stackoverflow %}
+          <li>
+            <a href="https://stackoverflow.com/users/{{ site.author.stackoverflow_user_id }}" rel="me">
+              <span class="icon">
+                <img alt="stackoverflow logo" src="/assets/images/contacts/stackoverflow.png" />
+              </span>
+              <span class="username">Stackoverflow: {{ site.author.stackoverflow }}</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
+{% if site.google_analytics %}
+<script>
+  (function (b, o, i, l, e, r) {
+    b.GoogleAnalyticsObject = l; b[l] || (b[l] =
+      function () { (b[l].q = b[l].q || []).push(arguments) }); b[l].l = +new Date;
+    e = o.createElement(i); r = o.getElementsByTagName(i)[0];
+    e.src = '//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e, r)
+  }(window, document, 'script', 'ga'));
+  ga('create', '{{ site.google_analytics }}'); ga('send', 'pageview');
+</script>
+{% endif %}

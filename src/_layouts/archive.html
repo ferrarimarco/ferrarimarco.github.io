@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<h1>
+  {% if page.type == 'tag' or page.type == 'category' %}
+    {% capture page_header %}Archive of posts with {{ page.type }} '{{ page.title }}'{% endcapture %}
+  {% elsif page.type == 'year' %}
+    {% capture page_header %}Archive of posts from {{ page.date | date: site.date_format_year }}{% endcapture %}
+  {% elsif page.type == 'month' %}
+    {% capture page_header %}Archive of posts from {{ page.date | date: site.date_format_year_month }}{% endcapture %}
+  {% endif %}{% if page_header %}{{ page_header }}{% endif %}
+</h1>
+{% include post_list.html %}

@@ -1,0 +1,78 @@
+# Title, decription, tagline and URL for your site
+# Can be used in your theme by calling 'site.title' and so on
+title: Marco Ferrari - Cloud Solutions Architect - Google
+description: Personal website of Marco Ferrari
+url: https://ferrarimarco.info
+
+# Used so Jekyll outputs the site correctly so Gulp can do what it wants
+source: .tmp/jekyll-preprocessed-src
+destination: .tmp/jekyll-built
+exclude: ['assets']
+
+date_format: "%Y-%m-%d"
+date_format_day: "%d"
+date_format_month: "%m"
+date_format_year: "%Y"
+date_format_year_month: "%Y-%m"
+
+# Same as the title etc for your site but can instead be
+# called by using 'site.author.name' and so on
+# NOTE: Don't use @ in front of your Twitter username
+author:
+  name: Marco Ferrari
+  email: ferrari.marco@gmail.com
+  uri: https://ferrarimarco.info
+  github: ferrarimarco
+  facebook: ferrari.marco
+  linkedin: ferrarimark
+  stackoverflow: marco-ferrari
+  stackoverflow_user_id: '653462'
+  twitter: ferrarimarco
+  cv_urls:
+    - language: ENG
+      url: https://bit.ly/cv-ferrari-marco
+
+# Google analytics ID: UA-zzzzzzzz-z
+google_analytics: UA-18832248-1
+
+# _config.build.yml overwrites these options when you run `gulp build`
+# Enables future posts (posts with dates in the future) and drafts
+future: true
+show_drafts: true
+lsi: false
+limit_posts: 10
+
+# Permalink structure and pagination options
+# pretty = /:categories/:year/:month/:day/:title/
+permalink: /blog/:categories/:year/:month/:day/:title/
+paginate: 10
+paginate_path: 'page:num'
+excerpt_separator: '<!--more-->'
+
+page_title_separator: " | "
+
+# Extending Jekyll
+plugins:
+  - jekyll-archives
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Settings for archives
+jekyll-archives:
+  enabled:
+    - year
+    - month
+    - categories
+    - tags
+  layouts:
+    year: 'archive'
+    month: 'archive'
+    category: 'archive'
+    tag: 'archive'
+  permalinks:
+    year: '/blog/archive/:year/'
+    month: '/blog/archive/:year/:month/'
+    category: '/blog/archive/category/:name/'
+    tag: '/blog/archive/tag/:name/'
