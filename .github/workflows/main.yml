@@ -11,6 +11,7 @@ jobs:
         uses: github/super-linter@v3.14.3
         env:
           ERROR_ON_MISSING_EXEC_BIT: true
+          LINTER_RULES_PATH: .
           VALIDATE_ALL_CODEBASE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build_prod:
