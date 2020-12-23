@@ -2,6 +2,8 @@
 
 This is the source code of my personal website: <https://ferrarimarco.info>
 
+![CI](https://github.com/ferrarimarco/ferrarimarco.github.io/workflows/CI/badge.svg)
+
 ## Development Environment
 
 ### Dependencies
