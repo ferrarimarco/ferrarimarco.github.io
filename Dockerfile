@@ -27,24 +27,20 @@ COPY package.json package.json
 RUN npm install -g fs-extra@$(< package.json grep fs-extra | awk -F '"' '{print $4}') \
   && npm install -g gulp-cli@$(< package.json grep gulp-cli | awk -F '"' '{print $4}')
 
+COPY package.json package.json
+RUN npm install \
+  && npm cache clean --force \
+  && rm package.json
+
 COPY Gemfile Gemfile
 
 # Get the version specified in Gemfile (that may be automatically updated when new package versions are pushed)
 # hadolint ignore=SC2046
 RUN \
   gem install bundler:$(< Gemfile grep bundler | awk -F "'" '{print $4}') \
-  && bundle install
-
-WORKDIR /usr/app
-
-COPY package.json package.json
-RUN npm install \
-  && npm cache clean --force
-
-COPY Gemfile Gemfile
-RUN bundle install
-
-RUN mkdir -p /root/.ssh
+  && bundle config set --local system 'true' \
+  && bundle install \
+  && rm Gemfile
 
 # Configure Git
 RUN \
