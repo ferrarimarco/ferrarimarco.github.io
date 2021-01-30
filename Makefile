@@ -24,34 +24,34 @@ IMAGE_ID := "ferrarimarco/personal-website:latest"
 build-serve-dev: build-docker-image ## Build and serve a development version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v ""$(CURDIR)":/usr/app" \
-		-v /usr/app/node_modules/ \
 		-p 3000:3000 \
 		-p 3001:3001 \
+		-w /usr/app \
 		"$(IMAGE_ID)"
 
 .PHONY: build-serve-prod
 build-serve-prod: build-docker-image ## Build and serve a production version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v ""$(CURDIR)":/usr/app" \
-		-v /usr/app/node_modules/ \
 		-p 3000:3000 \
 		-p 3001:3001 \
+		-w /usr/app \
 		"$(IMAGE_ID)" --prod
 
 .PHONY: build-prod
 build-prod: build-docker-image ## Build a production version of the website
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v ""$(CURDIR)":/usr/app" \
-		-v /usr/app/node_modules/ \
+		-w /usr/app \
 		"$(IMAGE_ID)" build --prod
 
 .PHONY: build-prod-serve-dist
 build-prod-serve-dist: build-docker-image ## Build and serve (from the `dist` directory) a production version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v ""$(CURDIR)":/usr/app" \
-		-v /usr/app/node_modules/ \
 		-p 3000:3000 \
 		-p 3001:3001 \
+		-w /usr/app \
 		"$(IMAGE_ID)" build-dist-serve --prod
 
 .PHONY: help
