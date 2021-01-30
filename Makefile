@@ -15,7 +15,7 @@ test: super-linter ## Run tests
 # so that the user can send e.g. ^C through.
 INTERACTIVE := $(shell [ -t 0 ] && echo 1 || echo 0)
 ifeq ($(INTERACTIVE), 1)
-	DOCKER_FLAGS += -t
+	DOCKER_FLAGS += -i
 endif
 
 IMAGE_ID := "ferrarimarco/personal-website:latest"
