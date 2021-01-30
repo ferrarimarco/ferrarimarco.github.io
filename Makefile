@@ -54,19 +54,6 @@ build-prod-serve-dist: build-docker-image ## Build and serve (from the `dist` di
 		-p 3001:3001 \
 		"$(IMAGE_ID)" build-dist-serve --prod
 
-.PHONY: super-linter
-super-linter: ## Run super-linter
-	docker run --rm -t $(DOCKER_FLAGS) \
-		-v "$(CURDIR)":/workspace \
-		-w="/workspace" \
-		-e DEFAULT_WORKSPACE=/workspace \
-		-e DISABLE_ERRORS=false \
-		-e LINTER_RULES_PATH=. \
-		-e MULTI_STATUS=false \
-		-e RUN_LOCAL=true \
-		-e VALIDATE_ALL_CODEBASE=true \
-		ghcr.io/github/super-linter:v3.14.5
-
 .PHONY: help
 help: ## Show help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
