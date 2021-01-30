@@ -14,8 +14,6 @@ import browserSync from 'browser-sync'
 import autoprefixer from 'autoprefixer'
 // Yargs for command line arguments
 import { argv } from 'yargs'
-// Use gulp-gh-pages to deploy
-import ghPages from 'gulp-gh-pages'
 
 const $ = gulpLoadPlugins()
 const reload = browserSync.reload
@@ -313,16 +311,3 @@ gulp.task('serve-dist', () => {
 // injects them into the templates, builds the site with Jekyll and serves it
 // 'gulp --prod' -- same as above but with production settings
 gulp.task('default', gulp.series('build', 'serve'))
-
-gulp.task('build-dist-serve', gulp.series('build', 'serve-dist'))
-
-gulp.task('deploy-gh-pages', () => {
-  return gulp.src(basePaths.dest + '/**/*').pipe(
-    ghPages({
-      branch: 'master',
-      remoteUrl: 'git@github.com:ferrarimarco/ferrarimarco.github.io.git'
-    })
-  )
-})
-
-gulp.task('deploy', gulp.series('clean', 'build', 'deploy-gh-pages'))

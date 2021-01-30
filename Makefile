@@ -54,14 +54,6 @@ build-prod-serve-dist: build-docker-image ## Build and serve (from the `dist` di
 		-p 3001:3001 \
 		"$(IMAGE_ID)" build-dist-serve --prod
 
-.PHONY: deploy
-deploy: test build-docker-image ## Deploy the site to production
-	docker run --rm -t $(DOCKER_FLAGS) \
-		-v ""$(CURDIR)":/usr/app" \
-		-v "/usr/app/node_modules/" \
-		-v ""$(CURDIR)"/id_rsa_ferrarimarco_github_io:/root/.ssh/id_rsa" \
-		"$(IMAGE_ID)" deploy --prod
-
 .PHONY: super-linter
 super-linter: ## Run super-linter
 	docker run --rm -t $(DOCKER_FLAGS) \
