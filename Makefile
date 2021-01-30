@@ -8,7 +8,7 @@ build-docker-image: ## Build the Docker image
 	docker build -t "ferrarimarco/personal-website:latest" .
 
 .PHONY: test
-test: super-linter ## Run tests
+test: jekyll-doctor ## Run tests
 
 # if this session isn't interactive, then we don't want to allocate a
 # TTY, which would fail, but if it is interactive, we do want to attach
@@ -53,6 +53,16 @@ build-prod-serve-dist: build-docker-image ## Build and serve (from the `dist` di
 		-p 3001:3001 \
 		-w /usr/app \
 		"$(IMAGE_ID)" build-dist-serve --prod
+
+.PHONY: jekyll-doctor
+jekyll-doctor: build-docker-image ## Build and serve (from the `dist` directory) a production version of the website with LiveReload support
+	docker run --rm -t $(DOCKER_FLAGS) \
+		-v ""$(CURDIR)":/usr/app" \
+		-p 3000:3000 \
+		-p 3001:3001 \
+		-w /usr/app \
+		"$(IMAGE_ID)" check
+
 
 .PHONY: help
 help: ## Show help
