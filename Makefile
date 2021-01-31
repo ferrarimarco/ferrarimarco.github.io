@@ -55,11 +55,9 @@ build-prod-serve-dist: build-docker-image ## Build and serve (from the `dist` di
 		"$(IMAGE_ID)" build-dist-serve --prod
 
 .PHONY: jekyll-doctor
-jekyll-doctor: build-docker-image ## Build and serve (from the `dist` directory) a production version of the website with LiveReload support
+jekyll-doctor: build-docker-image ## Run jekyll doctor
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v ""$(CURDIR)":/usr/app" \
-		-p 3000:3000 \
-		-p 3001:3001 \
 		-w /usr/app \
 		"$(IMAGE_ID)" check
 
