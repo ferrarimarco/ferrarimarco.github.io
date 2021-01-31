@@ -11,10 +11,10 @@ jobs:
         uses: github/super-linter@v3.14.3
         env:
           ERROR_ON_MISSING_EXEC_BIT: true
-          FILTER_REGEX_EXCLUDE: ".*src/((_layouts|_includes)/.*.html|index.html|googlead.*html)"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: .
           VALIDATE_ALL_CODEBASE: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_HTML: false
   build_prod:
     needs:
       - lint
@@ -24,3 +24,10 @@ jobs:
       - name: Build the production version
         run: |
           make build-prod
+      - name: Super-Linter (dist)
+        uses: github/super-linter@v3.14.3
+        env:
+          FILTER_REGEX_INCLUDE: "dist/**"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINTER_RULES_PATH: .
+          VALIDATE_ALL_CODEBASE: true

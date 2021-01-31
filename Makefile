@@ -39,7 +39,7 @@ build-serve-prod: build-docker-image ## Build and serve a production version of 
 		"$(IMAGE_ID)" --prod
 
 .PHONY: build-prod
-build-prod: build-docker-image ## Build a production version of the website
+build-prod: build-docker-image test ## Build a production version of the website
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v ""$(CURDIR)":/usr/app" \
 		-w /usr/app \
