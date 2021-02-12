@@ -124,7 +124,7 @@ gulp.task('html', () =>
       removeComments: true,
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
+      removeAttributeQuotes: false,
       removeRedundantAttributes: true
     })))
     .pipe($.if(argv.prod, $.size({ title: 'optimized HTML' })))
