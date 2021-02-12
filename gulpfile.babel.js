@@ -18,13 +18,13 @@ import { argv } from 'yargs'
 const $ = gulpLoadPlugins()
 const reload = browserSync.reload
 
-var basePaths = {
+let basePaths = {
   dest: 'dist',
   publish: '.publish',
   tmp: '.tmp'
 }
 
-var paths = {
+let paths = {
   assetsBuilt: basePaths.tmp + '/assets-built',
   destAssets: basePaths.dest + '/assets',
   destFavicon: basePaths.dest + '/favicon.ico',
@@ -101,16 +101,16 @@ gulp.task('inject:footer', () =>
 // 'gulp jekyll-build' -- builds your site with development settings
 // 'gulp jekyll-build --prod' -- builds your site with production settings
 gulp.task('jekyll-build', done => {
-  var jekyll_exec_command = ''
+  let jekyllExecCommand = ''
   if (!argv.prod) {
-    jekyll_exec_command = 'jekyll build'
+    jekyllExecCommand = 'jekyll build'
   } else {
-    jekyll_exec_command = 'jekyll build --config _config.yml,_config.build.yml'
+    jekyllExecCommand = 'jekyll build --config _config.yml,_config.build.yml'
   }
 
-  if (shell.exec(jekyll_exec_command).code !== 0) {
-    shell.echo('Error while running ' + jekyll_exec_command);
-    shell.exit(1);
+  if (shell.exec(jekyllExecCommand).code !== 0) {
+    shell.echo('Error while running ' + jekyllExecCommand)
+    shell.exit(1)
   }
   done()
 })
@@ -266,10 +266,9 @@ gulp.task('assets', gulp.series(
 
 // 'gulp doctor' -- literally just runs jekyll doctor
 gulp.task('jekyll:doctor', done => {
-
   if (shell.exec('jekyll doctor').code !== 0) {
-    shell.echo('Error: jekyll doctor found issues! Exiting...');
-    shell.exit(1);
+    shell.echo('Error: jekyll doctor found issues! Exiting...')
+    shell.exit(1)
   }
   done()
 })
