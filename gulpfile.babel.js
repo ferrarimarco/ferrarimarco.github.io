@@ -18,13 +18,13 @@ import { argv } from 'yargs'
 const $ = gulpLoadPlugins()
 const reload = browserSync.reload
 
-let basePaths = {
+const basePaths = {
   dest: 'dist',
   publish: '.publish',
   tmp: '.tmp'
 }
 
-let paths = {
+const paths = {
   assetsBuilt: basePaths.tmp + '/assets-built',
   destAssets: basePaths.dest + '/assets',
   destFavicon: basePaths.dest + '/favicon.ico',
