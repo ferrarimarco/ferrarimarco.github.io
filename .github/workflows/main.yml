@@ -1,9 +1,10 @@
-name: CI
+name: Build and deploy
 
 on: [push, pull_request]
 
 jobs:
   lint:
+    name: Lint the codebase
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
@@ -16,6 +17,7 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_HTML: false
   build_prod:
+    name: Build and lint the production version
     needs:
       - lint
     runs-on: ubuntu-20.04
