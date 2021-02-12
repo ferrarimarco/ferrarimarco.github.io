@@ -101,13 +101,18 @@ gulp.task('inject:footer', () =>
 // 'gulp jekyll-build' -- builds your site with development settings
 // 'gulp jekyll-build --prod' -- builds your site with production settings
 gulp.task('jekyll-build', done => {
+  var jekyll_exec_command = ''
   if (!argv.prod) {
-    shell.exec('jekyll build')
-    done()
-  } else if (argv.prod) {
-    shell.exec('jekyll build --config _config.yml,_config.build.yml')
-    done()
+    jekyll_exec_command = 'jekyll build'
+  } else {
+    jekyll_exec_command = 'jekyll build --config _config.yml,_config.build.yml'
   }
+
+  if (shell.exec(jekyll_exec_command).code !== 0) {
+    shell.echo('Error while running ' + jekyll_exec_command);
+    shell.exit(1);
+  }
+  done()
 })
 
 // 'gulp copy:jekyll' -- copies jekyll site into the dist directory
@@ -261,7 +266,11 @@ gulp.task('assets', gulp.series(
 
 // 'gulp doctor' -- literally just runs jekyll doctor
 gulp.task('jekyll:doctor', done => {
-  shell.exec('jekyll doctor')
+
+  if (shell.exec('jekyll doctor').code !== 0) {
+    shell.echo('Error: jekyll doctor found issues! Exiting...');
+    shell.exit(1);
+  }
   done()
 })
 
