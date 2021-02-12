@@ -18,13 +18,13 @@ import { argv } from 'yargs'
 const $ = gulpLoadPlugins()
 const reload = browserSync.reload
 
-var basePaths = {
+const basePaths = {
   dest: 'dist',
   publish: '.publish',
   tmp: '.tmp'
 }
 
-var paths = {
+const paths = {
   assetsBuilt: basePaths.tmp + '/assets-built',
   destAssets: basePaths.dest + '/assets',
   destFavicon: basePaths.dest + '/favicon.ico',
@@ -101,13 +101,18 @@ gulp.task('inject:footer', () =>
 // 'gulp jekyll-build' -- builds your site with development settings
 // 'gulp jekyll-build --prod' -- builds your site with production settings
 gulp.task('jekyll-build', done => {
+  let jekyllExecCommand = ''
   if (!argv.prod) {
-    shell.exec('jekyll build')
-    done()
-  } else if (argv.prod) {
-    shell.exec('jekyll build --config _config.yml,_config.build.yml')
-    done()
+    jekyllExecCommand = 'jekyll build'
+  } else {
+    jekyllExecCommand = 'jekyll build --config _config.yml,_config.build.yml'
   }
+
+  if (shell.exec(jekyllExecCommand).code !== 0) {
+    shell.echo('Error while running ' + jekyllExecCommand)
+    shell.exit(1)
+  }
+  done()
 })
 
 // 'gulp copy:jekyll' -- copies jekyll site into the dist directory
@@ -124,7 +129,7 @@ gulp.task('html', () =>
       removeComments: true,
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
+      removeAttributeQuotes: false,
       removeRedundantAttributes: true
     })))
     .pipe($.if(argv.prod, $.size({ title: 'optimized HTML' })))
@@ -261,7 +266,10 @@ gulp.task('assets', gulp.series(
 
 // 'gulp doctor' -- literally just runs jekyll doctor
 gulp.task('jekyll:doctor', done => {
-  shell.exec('jekyll doctor')
+  if (shell.exec('jekyll doctor').code !== 0) {
+    shell.echo('Error: jekyll doctor found issues! Exiting...')
+    shell.exit(1)
+  }
   done()
 })
 

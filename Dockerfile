@@ -33,6 +33,7 @@ RUN npm install \
   && rm package.json
 
 COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
 
 # Get the version specified in Gemfile (that may be automatically updated when new package versions are pushed)
 # hadolint ignore=SC2046
@@ -40,7 +41,7 @@ RUN \
   gem install bundler:$(< Gemfile grep bundler | awk -F "'" '{print $4}') \
   && bundle config set --local system 'true' \
   && bundle install \
-  && rm Gemfile
+  && rm Gemfile Gemfile.lock
 
 # Configure Git
 RUN \
