@@ -32,6 +32,13 @@ const paths = {
   jekyllPreprocessedSrc: basePaths.tmp + '/jekyll-preprocessed-src'
 }
 
+process.on('SIGINT', function () {
+  setTimeout(function () {
+    gutil.log(gutil.colors.red('Successfully closed ' + process.pid));
+    process.exit(1);
+  }, 500);
+});
+
 // 'gulp clean:assets' -- deletes all assets except for images and favicon
 // 'gulp clean:dist' -- erases the dist directory
 // 'gulp clean:publish' --  deletes the .publish directory
