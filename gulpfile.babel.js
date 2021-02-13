@@ -19,7 +19,7 @@ const $ = gulpLoadPlugins()
 const reload = browserSync.reload
 
 const basePaths = {
-  dest: 'dist',
+  dest: 'docs',
   publish: '.publish',
   tmp: '.tmp'
 }
