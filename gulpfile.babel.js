@@ -307,7 +307,7 @@ gulp.task('serve', () => {
 
 // 'gulp serve' -- open up your website in your browser and watch for changes
 // in all your files and update them when needed
-gulp.task('serve-dist', () => {
+gulp.task('serve-dest', () => {
   browserSync({
     server: {
       baseDir: [basePaths.dest]
@@ -319,3 +319,5 @@ gulp.task('serve-dist', () => {
 // injects them into the templates, builds the site with Jekyll and serves it
 // 'gulp --prod' -- same as above but with production settings
 gulp.task('default', gulp.series('build', 'serve'))
+
+gulp.task('build-serve-dest', gulp.series('build', 'serve-dest'))

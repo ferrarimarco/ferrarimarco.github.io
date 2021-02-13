@@ -45,14 +45,14 @@ build-prod: build-docker-image test ## Build a production version of the website
 		-w /usr/app \
 		"$(IMAGE_ID)" build --prod
 
-.PHONY: build-prod-serve-dist
-build-prod-serve-dist: build-docker-image ## Build and serve (from the `dist` directory) a production version of the website with LiveReload support
+.PHONY: build-prod-serve-dest
+build-prod-serve-dest: build-docker-image ## Build and serve (from the destination directory) a production version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v ""$(CURDIR)":/usr/app" \
 		-p 3000:3000 \
 		-p 3001:3001 \
 		-w /usr/app \
-		"$(IMAGE_ID)" build-dist-serve --prod
+		"$(IMAGE_ID)" build-serve-dest --prod
 
 .PHONY: jekyll-doctor
 jekyll-doctor: build-docker-image ## Run jekyll doctor
@@ -60,7 +60,6 @@ jekyll-doctor: build-docker-image ## Run jekyll doctor
 		-v ""$(CURDIR)":/usr/app" \
 		-w /usr/app \
 		"$(IMAGE_ID)" check
-
 
 .PHONY: help
 help: ## Show help
