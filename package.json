@@ -16,7 +16,7 @@
     "defaults"
   ],
   "dependencies": {
-    "fs-extra": "9.0.1"
+    "fs-extra": "9.1.0"
   },
   "devDependencies": {
     "autoprefixer": "9.8.6",
