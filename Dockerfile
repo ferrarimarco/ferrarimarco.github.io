@@ -9,15 +9,26 @@ RUN apk add --update --no-cache \
   automake \
   build-base \
   ca-certificates \
-  git \
   libtool \
   nasm \
   nodejs \
   npm \
-  openssh-client \
-  wget \
-  && update-ca-certificates \
-  && ssh-keyscan github.com >> /etc/ssh/ssh_known_hosts
+  && update-ca-certificates
+
+ARG UNAME=builder
+ARG UID=1000
+ARG GID=1000
+
+RUN addgroup \
+  --gid "${GID}" \
+  "${UNAME}" \
+  && adduser \
+  --disabled-password \
+  --gecos "" \
+  --ingroup "${UNAME}" \
+  --shell /bin/ash \
+  --uid "$UID" \
+  "${UNAME}"
 
 COPY package.json package.json
 
@@ -27,7 +38,8 @@ COPY package.json package.json
 RUN npm install -g fs-extra@$(< package.json grep fs-extra | awk -F '"' '{print $4}') \
   && npm install -g gulp-cli@$(< package.json grep gulp-cli | awk -F '"' '{print $4}')
 
-COPY package.json package.json
+USER "${UNAME}"
+
 RUN npm install \
   && npm cache clean --force \
   && rm package.json
@@ -42,12 +54,6 @@ RUN \
   && bundle config set --local system 'true' \
   && bundle install \
   && rm Gemfile Gemfile.lock
-
-# Configure Git
-RUN \
-  git config --global user.email "ferrari.marco@gmail.com" \
-  && git config --global user.name "Marco Ferrari" \
-  && git config --global url."https://".insteadOf git://
 
 ENTRYPOINT ["gulp"]
 EXPOSE 3000 3001

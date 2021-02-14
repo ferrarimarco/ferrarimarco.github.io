@@ -7,7 +7,10 @@ IMAGE_ID := "ferrarimarco/personal-website:latest"
 
 .PHONY: build-docker-image
 build-docker-image: ## Build the Docker image
-	docker build -t "ferrarimarco/personal-website:latest" .
+	docker build \
+		--build-arg UID="$(shell id -u)" \
+		--build-arg GID="$(shell id -g)" \
+		-t "$(IMAGE_ID)" .
 
 .PHONY: test
 test: jekyll-doctor ## Run tests
