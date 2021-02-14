@@ -3,6 +3,8 @@
 .PHONY: all
 all: test build-docker-image ## Lint the code base, build the Docker image.
 
+IMAGE_ID := "ferrarimarco/personal-website:latest"
+
 .PHONY: build-docker-image
 build-docker-image: ## Build the Docker image
 	docker build -t "ferrarimarco/personal-website:latest" .
@@ -17,8 +19,6 @@ INTERACTIVE := $(shell [ -t 0 ] && echo 1 || echo 0)
 ifeq ($(INTERACTIVE), 1)
 	DOCKER_FLAGS += -i
 endif
-
-IMAGE_ID := "ferrarimarco/personal-website:latest"
 
 .PHONY: build-serve-dev
 build-serve-dev: build-docker-image ## Build and serve a development version of the website with LiveReload support
