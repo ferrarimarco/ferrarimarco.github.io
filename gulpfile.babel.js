@@ -32,12 +32,12 @@ const paths = {
   jekyllPreprocessedSrc: basePaths.tmp + '/jekyll-preprocessed-src'
 }
 
+// Handle SIGINT (example: sent via CTRL-C)
 process.on('SIGINT', function () {
   setTimeout(function () {
-    gutil.log(gutil.colors.red('Successfully closed ' + process.pid));
-    process.exit(1);
-  }, 500);
-});
+    process.exit(1)
+  }, 500)
+})
 
 // 'gulp clean:assets' -- deletes all assets except for images and favicon
 // 'gulp clean:dist' -- erases the dist directory
