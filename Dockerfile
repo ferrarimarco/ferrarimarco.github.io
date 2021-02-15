@@ -30,19 +30,18 @@ RUN addgroup \
   --uid "$UID" \
   "${UNAME}"
 
-COPY package.json package.json
-
-# Get the version specified in package.json (that may be automatically updated when new package versions are pushed)
-# Don't enforce quoting here because version numbers are already quoted in package.json
-# hadolint ignore=SC2046
-RUN npm install -g fs-extra@$(< package.json grep fs-extra | awk -F '"' '{print $4}') \
-  && npm install -g gulp-cli@$(< package.json grep gulp-cli | awk -F '"' '{print $4}')
+ENV NODE_DEPENDENCIES_PATH=/usr
+WORKDIR "${NODE_DEPENDENCIES_PATH}"
+RUN chown -R ${UID}:${GID} "${NODE_DEPENDENCIES_PATH}"
 
 USER "${UNAME}"
 
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
 RUN npm install \
   && npm cache clean --force \
-  && rm package.json
+  && rm package.json package-lock.json
 
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
@@ -55,5 +54,8 @@ RUN \
   && bundle install \
   && rm Gemfile Gemfile.lock
 
-ENTRYPOINT ["gulp"]
+ENV NODE_PATH="${NODE_DEPENDENCIES_PATH}"/node_modules
+ENV PATH="${NODE_PATH}/.bin":"${PATH}"
+
+ENTRYPOINT ["npx", "--no-install", "gulp"]
 EXPOSE 3000 3001
