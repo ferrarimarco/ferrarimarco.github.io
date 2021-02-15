@@ -11,6 +11,7 @@ jobs:
       - name: Super-Linter
         uses: github/super-linter@v3.14.3
         env:
+          FILTER_REGEX_EXCLUDE: "docs/**"
           ERROR_ON_MISSING_EXEC_BIT: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: .
@@ -26,10 +27,10 @@ jobs:
       - name: Build the production version
         run: |
           make build-prod
-      - name: Super-Linter (dist)
+      - name: Super-Linter (docs)
         uses: github/super-linter@v3.14.3
         env:
-          FILTER_REGEX_INCLUDE: "dist/**"
+          FILTER_REGEX_INCLUDE: "docs/**"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: .
           VALIDATE_ALL_CODEBASE: true
