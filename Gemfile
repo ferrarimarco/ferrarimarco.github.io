@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'bundler', '2.2.9'
+gem 'bundler', '2.2.10'
 
 gem 'jekyll', '4.2.0'
 gem 'redcarpet', '3.5.1'
