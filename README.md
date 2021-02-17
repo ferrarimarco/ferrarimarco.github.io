@@ -2,7 +2,7 @@
 
 This is the source code of my personal website: <https://ferrarimarco.info>
 
-![CI](https://github.com/ferrarimarco/ferrarimarco.github.io/workflows/CI/badge.svg)
+![Build and deploy](https://github.com/ferrarimarco/ferrarimarco.github.io/workflows/Build%20and%20deploy/badge.svg)
 
 ## Development Environment
 
