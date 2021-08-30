@@ -13,22 +13,25 @@ RUN apk add --update --no-cache \
   nasm \
   nodejs \
   npm \
+  shadow \
   && update-ca-certificates
 
 ARG UNAME=builder
 ARG UID=1000
 ARG GID=1000
 
-RUN addgroup \
+# Use the binaries provided by the shadow packages to support UIDs and GIDs
+# greater than 256000
+RUN /usr/sbin/groupadd \
   --gid "${GID}" \
   "${UNAME}" \
-  && adduser \
-  --disabled-password \
-  --gecos "" \
-  --ingroup "${UNAME}" \
+  && /usr/sbin/useradd \
+  --gid "${UNAME}" \
   --shell /bin/ash \
   --uid "$UID" \
-  "${UNAME}"
+  "${UNAME}" \
+  && mkdir /home/"${UNAME}" \
+  && chown -R "${UNAME}":"${UNAME}" /home/"${UNAME}"
 
 ENV NODE_DEPENDENCIES_PATH=/usr
 WORKDIR "${NODE_DEPENDENCIES_PATH}"
@@ -36,15 +39,15 @@ RUN chown -R ${UID}:${GID} "${NODE_DEPENDENCIES_PATH}"
 
 USER "${UNAME}"
 
-COPY package.json package.json
-COPY package-lock.json package-lock.json
+COPY --chown="${UNAME}":"${UNAME}" package.json package.json
+COPY --chown="${UNAME}":"${UNAME}" package-lock.json package-lock.json
 
 RUN npm install \
   && npm cache clean --force \
   && rm package.json package-lock.json
 
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
+COPY --chown="${UNAME}":"${UNAME}" Gemfile Gemfile
+COPY --chown="${UNAME}":"${UNAME}" Gemfile.lock Gemfile.lock
 
 # Get the version specified in Gemfile (that may be automatically updated when new package versions are pushed)
 # hadolint ignore=SC2046

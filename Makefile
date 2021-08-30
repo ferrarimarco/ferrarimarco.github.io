@@ -26,6 +26,7 @@ endif
 .PHONY: build-serve-dev
 build-serve-dev: build-docker-image ## Build and serve a development version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
+		--network host \
 		-v ""$(CURDIR)":/usr/app" \
 		-p 3000:3000 \
 		-p 3001:3001 \
@@ -35,6 +36,7 @@ build-serve-dev: build-docker-image ## Build and serve a development version of 
 .PHONY: build-serve-prod
 build-serve-prod: build-docker-image ## Build and serve a production version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
+		--network host \
 		-v ""$(CURDIR)":/usr/app" \
 		-p 3000:3000 \
 		-p 3001:3001 \
@@ -51,6 +53,7 @@ build-prod: build-docker-image test ## Build a production version of the website
 .PHONY: build-prod-serve-dest
 build-prod-serve-dest: build-docker-image ## Build and serve (from the destination directory) a production version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
+		--network host \
 		-v ""$(CURDIR)":/usr/app" \
 		-p 3000:3000 \
 		-p 3001:3001 \
