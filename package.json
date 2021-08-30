@@ -19,7 +19,7 @@
     "autoprefixer": "9.8.6",
     "babel-core": "6.26.3",
     "babel-preset-env": "1.7.0",
-    "browser-sync": "2.26.14",
+    "browser-sync": "2.27.5",
     "del": "6.0.0",
     "fs-extra": "9.1.0",
     "gulp": "4.0.2",
