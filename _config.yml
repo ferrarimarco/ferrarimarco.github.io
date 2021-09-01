@@ -15,22 +15,7 @@ date_format_month: "%m"
 date_format_year: "%Y"
 date_format_year_month: "%Y-%m"
 
-# Same as the title etc for your site but can instead be
-# called by using 'site.author.name' and so on
-# NOTE: Don't use @ in front of your Twitter username
-author:
-  name: Marco Ferrari
-  email: ferrari.marco@gmail.com
-  uri: https://ferrarimarco.info
-  github: ferrarimarco
-  facebook: ferrari.marco
-  linkedin: ferrarimark
-  stackoverflow: marco-ferrari
-  stackoverflow_user_id: '653462'
-  twitter: ferrarimarco
-  cv_urls:
-    - language: ENG
-      url: https://bit.ly/cv-ferrari-marco
+author_id: ferrarimarco
 
 # Google analytics ID: UA-zzzzzzzz-z
 google_analytics: UA-18832248-1
