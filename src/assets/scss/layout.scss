@@ -172,7 +172,8 @@
   font-size: 20px;
 }
 
-.post-list {
+.post-list,
+.publication-list {
   > ul {
     margin-left: 0;
     list-style: none;
@@ -183,7 +184,8 @@
   }
 }
 
-.post-meta {
+.post-meta,
+.publication-meta {
   font-size: $small-font-size;
   color: $grey-color;
 }

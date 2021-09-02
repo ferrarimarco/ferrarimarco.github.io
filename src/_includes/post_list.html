@@ -5,8 +5,11 @@
     {% else %}
     {% assign posts = site.posts %}
     {% endif %}
+    {% if posts.size > 0 %}
+    <h2 class="post-list-title">Posts</h2>
     {% for post in posts %}
     {% include post_list_item.html date=post.date url=post.url title=post.title %}
     {% endfor %}
+    {% endif %}
   </ul>
 </div>

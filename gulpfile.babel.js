@@ -300,16 +300,12 @@ gulp.task('serve', () => {
 
   // Watch various files for changes and do the needful
   gulp.watch(
-    ['src/**/*.md', 'src/**/*.html', 'src/**/*.yml', '*.yml'],
+    ['src/**/*.md', 'src/**/*.html', 'src/**/*.yml', 'src/assets/**/*', '*.yml', 'src/**/*.yaml', '*.yaml'],
     { usePolling: true },
-    gulp.series('jekyll', function (done) {
+    gulp.series('assets', 'jekyll', function (done) {
       reload()
       done()
     }))
-  gulp.watch('src/assets/**/*', { usePolling: true }, gulp.series('assets'), function (done) {
-    reload()
-    done()
-  })
 })
 
 // 'gulp serve' -- open up your website in your browser and watch for changes
