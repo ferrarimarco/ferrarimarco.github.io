@@ -1,0 +1,68 @@
+{% assign author = site.data.authors[site.author_id] %}
+<ul class="contact-list">
+  {% if author.email %}
+  <li>
+    <a href="mailto:{{ author.email }}">
+      <span class="icon">
+        <img alt="email icon" src="/assets/images/contacts/email.png" />
+      </span>
+      <span class="username">Email: {{ author.email }}</span>
+    </a>
+  </li>
+  {% endif %}
+
+  {% if author.github %}
+  <li>
+    <a href="https://github.com/{{ author.github }}" rel="me">
+      <span class="icon">
+        <img alt="github logo" src="/assets/images/contacts/github.png" />
+      </span>
+      <span class="username">Github: {{ author.github }}</span>
+    </a>
+  </li>
+  {% endif %}
+
+  {% if author.facebook %}
+  <li>
+    <a href="https://www.facebook.com/{{ author.facebook }}" rel="me">
+      <span class="icon">
+        <img alt="facebook logo" src="/assets/images/contacts/facebook.png" />
+      </span>
+      <span class="username">Facebook: {{ author.facebook }}</span>
+    </a>
+  </li>
+  {% endif %}
+
+  {% if author.twitter %}
+  <li>
+    <a href="https://twitter.com/{{ author.twitter }}" rel="me">
+      <span class="icon">
+        <img alt="twitter logo" src="/assets/images/contacts/twitter.png" />
+      </span>
+      <span class="username">Twitter: @{{ author.twitter }}</span>
+    </a>
+  </li>
+  {% endif %}
+
+  {% if author.linkedin %}
+  <li>
+    <a href="https://www.linkedin.com/in/{{ author.linkedin }}" rel="me" data-proofer-ignore>
+      <span class="icon">
+        <img alt="linkedin logo" src="/assets/images/contacts/linkedin.png" />
+      </span>
+      <span class="username">Linkedin: {{ author.linkedin }}</span>
+    </a>
+  </li>
+  {% endif %}
+
+  {% if author.stackoverflow %}
+  <li>
+    <a href="https://stackoverflow.com/users/{{ author.stackoverflow_user_id }}" rel="me">
+      <span class="icon">
+        <img alt="stackoverflow logo" src="/assets/images/contacts/stackoverflow.png" />
+      </span>
+      <span class="username">Stackoverflow: {{ author.stackoverflow }}</span>
+    </a>
+  </li>
+  {% endif %}
+</ul>
