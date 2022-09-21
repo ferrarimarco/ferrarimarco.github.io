@@ -49,15 +49,11 @@ RUN npm install \
 COPY --chown="${UNAME}":"${UNAME}" Gemfile Gemfile
 COPY --chown="${UNAME}":"${UNAME}" Gemfile.lock Gemfile.lock
 
-# Get the version specified in Gemfile (that may be automatically updated when new package versions are pushed)
-# hadolint ignore=SC2046
-RUN \
-  gem install bundler:$(< Gemfile grep bundler | awk -F "'" '{print $4}') \
-  && bundle config set --local system 'true' \
+RUN bundle config set --local system 'true' \
   && bundle install \
   && rm Gemfile Gemfile.lock
 
-ENV NODE_PATH="${NODE_DEPENDENCIES_PATH}"/node_modules
+ENV NODE_PATH="${NODE_DEPENDENCIES_PATH}/node_modules"
 ENV PATH="${NODE_PATH}/.bin":"${PATH}"
 
 ENTRYPOINT ["npx", "--no-install", "gulp"]
