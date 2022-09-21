@@ -5,7 +5,7 @@ import gulp from 'gulp'
 // to call them as $.pluginname
 import gulpLoadPlugins from 'gulp-load-plugins'
 // Delete stuff
-import del from 'del'
+import { deleteAsync } from 'del'
 // Used to run shell commands
 import shell from 'shelljs'
 // BrowserSync is used to live-reload your website
@@ -13,9 +13,20 @@ import browserSync from 'browser-sync'
 // AutoPrefixer
 import autoprefixer from 'autoprefixer'
 // Yargs for command line arguments
-import { argv } from 'yargs'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+const argv = yargs(hideBin(process.argv)).argv
 
-const $ = gulpLoadPlugins()
+import dartSass from 'sass'
+
+const $ = gulpLoadPlugins({
+  config: process.env.npm_package_json,
+  postRequireTransforms: {
+    sass: function (sass) {
+      return foo.gulpSass(dartSass);
+    }
+  }
+})
 const reload = browserSync.reload
 
 const basePaths = {
@@ -47,10 +58,10 @@ process.on('SIGINT', function () {
 // 'gulp clean:jekyll-preprocessed-src' -- deletes the jekyll build source
 // 'gulp clean' -- cleans the project
 gulp.task('clean:assets', () => {
-  return del([paths.assetsBuilt + '/**/*', paths.assetsBuilt, paths.destAssets, paths.destFavicon])
+  return deleteAsync([paths.assetsBuilt + '/**/*', paths.assetsBuilt, paths.destAssets, paths.destFavicon])
 })
 gulp.task('clean:dist-jekyll', () => {
-  return del([
+  return deleteAsync([
     basePaths.dest + '/**/*',
     '!' + basePaths.dest,
     '!' + paths.destAssets,
@@ -60,19 +71,19 @@ gulp.task('clean:dist-jekyll', () => {
   )
 })
 gulp.task('clean:dist', () => {
-  return del([basePaths.dest + '/**/*'])
+  return deleteAsync([basePaths.dest + '/**/*'])
 })
 gulp.task('clean:publish', () => {
-  return del([basePaths.publish])
+  return deleteAsync([basePaths.publish])
 })
 gulp.task('clean:jekyll-built', () => {
-  return del([paths.jekyllBuilt])
+  return deleteAsync([paths.jekyllBuilt])
 })
 gulp.task('clean:jekyll-metadata', () => {
-  return del(['src/.jekyll-metadata'])
+  return deleteAsync(['src/.jekyll-metadata'])
 })
 gulp.task('clean:jekyll-preprocessed-src', () => {
-  return del([paths.jekyllPreprocessedSrc + '/**/*', paths.jekyllPreprocessedSrc])
+  return deleteAsync([paths.jekyllPreprocessedSrc + '/**/*', paths.jekyllPreprocessedSrc])
 })
 gulp.task('clean:jekyll', gulp.parallel(
   'clean:dist-jekyll',

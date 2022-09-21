@@ -10,6 +10,7 @@ build-docker-image: ## Build the Docker image
 	docker build \
 		--build-arg UID="$(shell id -u)" \
 		--build-arg GID="$(shell id -g)" \
+		--network host \
 		-t "$(IMAGE_ID)" .
 
 .PHONY: test
