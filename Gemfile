@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem 'jekyll', '4.2.2'
 gem 'redcarpet', '3.5.1'
-gem 'classifier-reborn', '2.2.0'
+gem 'classifier-reborn', '2.3.0'
 
 # jekyll plugins
 gem 'jekyll-archives', '2.2.1'
