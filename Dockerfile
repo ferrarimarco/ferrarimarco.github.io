@@ -10,6 +10,7 @@ RUN apk add --update --no-cache \
   build-base \
   ca-certificates \
   libtool \
+  make \
   nasm \
   nodejs \
   npm \
