@@ -17,13 +17,15 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 const argv = yargs(hideBin(process.argv)).argv
 
+// Import these to initialize the sass compiler
 import dartSass from 'sass'
+import gulpSass from 'gulp-sass'
 
 const $ = gulpLoadPlugins({
   config: process.env.npm_package_json,
   postRequireTransforms: {
-    sass: function (sass) {
-      return foo.gulpSass(dartSass);
+    sass: function () {
+      return gulpSass(dartSass);
     }
   }
 })
