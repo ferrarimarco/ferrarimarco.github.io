@@ -4,20 +4,15 @@ LABEL maintainer=ferrari.marco@gmail.com
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
-RUN apk add --update --no-cache \
-  autoconf \
-  automake \
+RUN apk add --no-cache \
   build-base \
   ca-certificates \
-  libtool \
   make \
-  nasm \
-  nodejs \
   npm \
   shadow \
   && update-ca-certificates
 
-ARG UNAME=builder
+ARG USERNAME=builder
 ARG UID=1000
 ARG GID=1000
 
@@ -25,37 +20,33 @@ ARG GID=1000
 # greater than 256000
 RUN /usr/sbin/groupadd \
   --gid "${GID}" \
-  "${UNAME}" \
+  "${USERNAME}" \
   && /usr/sbin/useradd \
-  --gid "${UNAME}" \
+  --gid "${USERNAME}" \
   --shell /bin/ash \
-  --uid "$UID" \
-  "${UNAME}" \
-  && mkdir /home/"${UNAME}" \
-  && chown -R "${UNAME}":"${UNAME}" /home/"${UNAME}"
+  --uid "${UID}" \
+  "${USERNAME}" \
+  && mkdir /home/"${USERNAME}" \
+  && chown -R "${USERNAME}":"${USERNAME}" /home/"${USERNAME}"
 
-ENV NODE_DEPENDENCIES_PATH=/usr
-WORKDIR "${NODE_DEPENDENCIES_PATH}"
-RUN chown -R ${UID}:${GID} "${NODE_DEPENDENCIES_PATH}"
+ENV APPLICATION_PATH=/usr/src/app
+WORKDIR "${APPLICATION_PATH}"
+RUN mkdir -p "${APPLICATION_PATH}" \
+  && chown -R ${UID}:${GID} "${APPLICATION_PATH}"
 
-USER "${UNAME}"
+USER "${USERNAME}"
 
-COPY --chown="${UNAME}":"${UNAME}" package.json package.json
-COPY --chown="${UNAME}":"${UNAME}" package-lock.json package-lock.json
+COPY --chown="${USERNAME}":"${USERNAME}" Gemfile Gemfile
+COPY --chown="${USERNAME}":"${USERNAME}" Gemfile.lock Gemfile.lock
 
-RUN npm install \
-  && npm cache clean --force \
-  && rm package.json package-lock.json
+RUN bundle install
 
-COPY --chown="${UNAME}":"${UNAME}" Gemfile Gemfile
-COPY --chown="${UNAME}":"${UNAME}" Gemfile.lock Gemfile.lock
+COPY --chown="${USERNAME}":"${USERNAME}" package.json package.json
+COPY --chown="${USERNAME}":"${USERNAME}" package-lock.json package-lock.json
 
-RUN bundle config set --local system 'true' \
-  && bundle install \
-  && rm Gemfile Gemfile.lock
+RUN rm -rf node_modules \
+  && npm install
 
-ENV NODE_PATH="${NODE_DEPENDENCIES_PATH}/node_modules"
-ENV PATH="${NODE_PATH}/.bin":"${PATH}"
-
-ENTRYPOINT ["npx", "--no-install", "gulp"]
 EXPOSE 3000 3001
+
+ENTRYPOINT ["npm", "run"]

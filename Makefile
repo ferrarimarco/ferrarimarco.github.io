@@ -3,7 +3,8 @@
 .PHONY: all
 all: test build-docker-image ## Lint the code base, build the Docker image.
 
-IMAGE_ID := "ferrarimarco/personal-website:latest"
+IMAGE_ID := ferrarimarco/personal-website:latest
+TARGET_APP_DIR := /usr/src/app
 
 .PHONY: build-docker-image
 build-docker-image: ## Build the Docker image
@@ -13,9 +14,6 @@ build-docker-image: ## Build the Docker image
 		--network host \
 		-t "$(IMAGE_ID)" .
 
-.PHONY: test
-test: jekyll-doctor ## Run tests
-
 # if this session isn't interactive, then we don't want to allocate a
 # TTY, which would fail, but if it is interactive, we do want to attach
 # so that the user can send e.g. ^C through.
@@ -24,49 +22,33 @@ ifeq ($(INTERACTIVE), 1)
 	DOCKER_FLAGS += -i
 endif
 
-.PHONY: build-serve-dev
-build-serve-dev: build-docker-image ## Build and serve a development version of the website with LiveReload support
-	docker run --rm -t $(DOCKER_FLAGS) \
-		--network host \
-		-v ""$(CURDIR)":/usr/app" \
-		-p 3000:3000 \
-		-p 3001:3001 \
-		-w /usr/app \
-		"$(IMAGE_ID)"
-
 .PHONY: build-serve-prod
 build-serve-prod: build-docker-image ## Build and serve a production version of the website with LiveReload support
 	docker run --rm -t $(DOCKER_FLAGS) \
 		--network host \
-		-v ""$(CURDIR)":/usr/app" \
+		--volume "$(CURDIR)":"$(TARGET_APP_DIR)" \
 		-p 3000:3000 \
 		-p 3001:3001 \
-		-w /usr/app \
-		"$(IMAGE_ID)" --prod
+		"$(IMAGE_ID)"
 
 .PHONY: build-prod
 build-prod: build-docker-image test ## Build a production version of the website
 	docker run --rm -t $(DOCKER_FLAGS) \
-		-v ""$(CURDIR)":/usr/app" \
-		-w /usr/app \
-		"$(IMAGE_ID)" build --prod
+		-v "$(CURDIR)":"$(TARGET_APP_DIR)" \
+		"$(IMAGE_ID)" build
 
-.PHONY: build-prod-serve-dest
-build-prod-serve-dest: build-docker-image ## Build and serve (from the destination directory) a production version of the website with LiveReload support
+.PHONY: shell
+shell: build-docker-image ## Open a shell in the container
 	docker run --rm -t $(DOCKER_FLAGS) \
-		--network host \
-		-v ""$(CURDIR)":/usr/app" \
-		-p 3000:3000 \
-		-p 3001:3001 \
-		-w /usr/app \
-		"$(IMAGE_ID)" build-serve-dest --prod
+		--entrypoint /bin/ash \
+		--volume "$(CURDIR)":"$(TARGET_APP_DIR)" \
+		"$(IMAGE_ID)"
 
-.PHONY: jekyll-doctor
-jekyll-doctor: build-docker-image ## Run jekyll doctor
+.PHONY: test
+test: build-docker-image ## Run tests
 	docker run --rm -t $(DOCKER_FLAGS) \
-		-v ""$(CURDIR)":/usr/app" \
-		-w /usr/app \
-		"$(IMAGE_ID)" check
+		--volume "$(CURDIR)":"$(TARGET_APP_DIR)" \
+		"$(IMAGE_ID)" test
 
 .PHONY: help
 help: ## Show help

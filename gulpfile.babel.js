@@ -255,10 +255,10 @@ gulp.task('scripts', () =>
 // 'gulp images' -- optimizes and caches your images
 gulp.task('images', () =>
   gulp.src('src/assets/images/**/*')
-    .pipe($.cache($.imagemin({
+    .pipe($.imagemin({
       progressive: true,
       interlaced: true
-    })))
+    }))
     .pipe(gulp.dest(paths.assetsBuilt + '/assets/images'))
     .pipe($.size({ title: 'images' }))
 )
