@@ -6,6 +6,14 @@ module.exports = {
     module: {
         rules: [
             {
+                generator: {
+                    // GitHub pages expects the name of this file to be CNAME
+                    filename: '[name]'
+                },
+                test: /CNAME/,
+                type: 'asset/resource'
+            },
+            {
                 test: /\.(s(a|c)ss)$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
             }
