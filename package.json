@@ -24,7 +24,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.production.babel.js",
     "clean": "rm -rf \"./docs/\"* \"./.tmp/\"* ./.publish src/.jekyll-metadata",
-    "postbuild": "jekyll doctor",
+    "postbuild": "jekyll doctor && rm -rf ./.tmp/jekyll-preprocessed-src/.jekyll-cache",
     "prebuild": "npm run clean",
     "prestart": "npm run clean",
     "start": "webpack serve --open --config webpack.config.development.babel.js"
