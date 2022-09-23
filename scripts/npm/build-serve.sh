@@ -5,4 +5,4 @@ set -o nounset
 
 npm run build
 
-webpack serve --open --config webpack.config.production.babel.js
+webpack serve --config webpack.config.production.babel.js

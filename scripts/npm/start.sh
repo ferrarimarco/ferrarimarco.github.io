@@ -3,4 +3,4 @@
 set -o errexit
 set -o nounset
 
-webpack serve --open --config webpack.config.development.babel.js
+webpack serve --config webpack.config.development.babel.js
