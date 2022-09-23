@@ -1,1 +1,1 @@
-//import cname from './assets/CNAME';
+import '../src/assets/scss/style.scss'

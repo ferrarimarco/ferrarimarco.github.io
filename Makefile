@@ -27,7 +27,7 @@ build-serve-prod: build-docker-image ## Build and serve a production version of 
 	docker run --rm -t $(DOCKER_FLAGS) \
 		--network host \
 		--volume "$(CURDIR)":"$(TARGET_APP_DIR)" \
-		"$(IMAGE_ID)"
+		"$(IMAGE_ID)" build-serve
 
 .PHONY: build-prod
 build-prod: build-docker-image ## Build a production version of the website

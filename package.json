@@ -8,9 +8,14 @@
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "@babel/register": "^7.18.9",
+    "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
+    "node-sass": "^7.0.3",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1",
     "webpack-merge": "^5.8.0"
   },
   "homepage": "ferrarimarco.info",
@@ -22,12 +27,13 @@
     "url": "git://github.com/ferrarimarco/ferrarimarco.github.io.git"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.production.babel.js",
-    "clean": "rm -rf \"./docs/\"* \"./.tmp/\"* ./.publish src/.jekyll-metadata",
-    "postbuild": "jekyll doctor && rm -rf ./.tmp/jekyll-preprocessed-src/.jekyll-cache",
-    "prebuild": "npm run clean",
-    "prestart": "npm run clean",
-    "start": "webpack serve --open --config webpack.config.development.babel.js"
+    "build": "./scripts/npm/build.sh",
+    "build-serve": "./scripts/npm/build-serve.sh",
+    "clean": "./scripts/npm/clean.sh",
+    "postbuild": "./scripts/npm/postbuild.sh",
+    "prebuild": "./scripts/npm/prebuild.sh",
+    "prestart": "./scripts/npm/prestart.sh",
+    "start": "./scripts/npm/start.sh"
   },
   "version": "4.0.0"
 }

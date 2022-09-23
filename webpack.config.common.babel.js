@@ -3,9 +3,17 @@ import path from 'path'
 
 module.exports = {
     entry: "./webpack/index.js",
+    module: {
+        rules: [
+            {
+                test: /\.(s(a|c)ss)$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+            }
+        ]
+    },
     output: {
         clean: true,
-        filename: "bundle.js",
+        filename: "assets/javascript/[name].bundle.js",
         path: path.resolve(__dirname, ".tmp/jekyll-preprocessed-src"),
     },
     plugins: [
