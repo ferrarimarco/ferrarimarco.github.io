@@ -1,3 +1,4 @@
+import CopyPlugin from 'copy-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import path from 'path'
 
@@ -7,10 +8,9 @@ module.exports = {
         rules: [
             {
                 generator: {
-                    // GitHub pages expects the name of this file to be CNAME
-                    filename: '[name]'
+                    filename: 'assets/images/[name]'
                 },
-                test: /CNAME/,
+                test: /\.(png|ico)$/i,
                 type: 'asset/resource'
             },
             {
@@ -25,7 +25,20 @@ module.exports = {
         path: path.resolve(__dirname, ".tmp/jekyll-preprocessed-src"),
     },
     plugins: [
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: "src",
+                    globOptions: {
+                        ignore: ["**/_includes/head.html", "**/*.scss", "**/favicon.ico"],
+                    },
+                    to: "./"
+                },
+            ],
+        }),
+        // Inject webpack-managed assets in the head
         new HtmlWebpackPlugin({
+            favicon: "./src/assets/favicon.ico",
             filename: "./_includes/head.html",
             hash: true,
             template: "./src/_includes/head.html"
