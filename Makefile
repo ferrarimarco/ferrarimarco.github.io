@@ -23,16 +23,14 @@ ifeq ($(INTERACTIVE), 1)
 endif
 
 .PHONY: build-serve-prod
-build-serve-prod: build-docker-image ## Build and serve a production version of the website with LiveReload support
+build-serve-prod: build-docker-image ## Build and serve a production version of the website with automatic reload support
 	docker run --rm -t $(DOCKER_FLAGS) \
 		--network host \
 		--volume "$(CURDIR)":"$(TARGET_APP_DIR)" \
-		-p 3000:3000 \
-		-p 3001:3001 \
 		"$(IMAGE_ID)"
 
 .PHONY: build-prod
-build-prod: build-docker-image test ## Build a production version of the website
+build-prod: build-docker-image ## Build a production version of the website
 	docker run --rm -t $(DOCKER_FLAGS) \
 		-v "$(CURDIR)":"$(TARGET_APP_DIR)" \
 		"$(IMAGE_ID)" build
@@ -43,12 +41,6 @@ shell: build-docker-image ## Open a shell in the container
 		--entrypoint /bin/ash \
 		--volume "$(CURDIR)":"$(TARGET_APP_DIR)" \
 		"$(IMAGE_ID)"
-
-.PHONY: test
-test: build-docker-image ## Run tests
-	docker run --rm -t $(DOCKER_FLAGS) \
-		--volume "$(CURDIR)":"$(TARGET_APP_DIR)" \
-		"$(IMAGE_ID)" test
 
 .PHONY: help
 help: ## Show help

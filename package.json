@@ -23,11 +23,11 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.production.babel.js",
-    "clean": "rm -rf \"./docs/\"* \"./.tmp/\"*",
+    "clean": "rm -rf \"./docs/\"* \"./.tmp/\"* ./.publish src/.jekyll-metadata",
+    "postbuild": "jekyll doctor",
     "prebuild": "npm run clean",
     "prestart": "npm run clean",
-    "start": "webpack serve --open --config webpack.config.development.babel.js",
-    "test": "jekyll doctor"
+    "start": "webpack serve --open --config webpack.config.development.babel.js"
   },
   "version": "4.0.0"
 }
