@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
       - name: Super-Linter
-        uses: github/super-linter@v4.9.6
+        uses: github/super-linter@v4.10.0
         env:
           FILTER_REGEX_EXCLUDE: "docs/**"
           ERROR_ON_MISSING_EXEC_BIT: true
@@ -28,7 +28,7 @@ jobs:
         run: |
           make build-prod
       - name: Super-Linter (docs)
-        uses: github/super-linter@v4.9.6
+        uses: github/super-linter@v4.10.0
         env:
           FILTER_REGEX_INCLUDE: "docs/**"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
