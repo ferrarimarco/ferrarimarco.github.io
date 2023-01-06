@@ -7,7 +7,7 @@ jobs:
     name: Lint the codebase
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.3.0
       - name: Super-Linter
         uses: github/super-linter@v4.9.6
         env:
@@ -23,7 +23,7 @@ jobs:
       - lint
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.3.0
       - name: Build the production version
         run: |
           make build-prod
