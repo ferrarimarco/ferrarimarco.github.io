@@ -42,7 +42,7 @@ module.exports = {
   output: {
     clean: true,
     filename: 'assets/javascript/[name].bundle.js',
-    path: path.resolve(__dirname, '.tmp/jekyll-preprocessed-src'),
+    path: path.resolve(__dirname, '.tmp/jekyll-preprocessed-src')
   },
   plugins: [
     new CopyPlugin({

@@ -1,3 +1,4 @@
+---
 name: Build and deploy
 
 on: [push, pull_request]
@@ -16,11 +17,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: config/lint
           VALIDATE_ALL_CODEBASE: true
-          # Don't validate HTML because it contains templated values
-          VALIDATE_HTML: false
           VALIDATE_JSCPD_ALL_CODEBASE: true
-          # Don't validate template files
+          # Don't validate templates with the following linters because they
+          # get confused
           VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_HTML: false
 
   build_prod:
     name: Build and lint the production version
@@ -40,7 +41,5 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           # Don't validate minified source
           VALIDATE_CSS: false
-          # Don't check if generated files match the configured EditorConfig style
-          VALIDATE_EDITORCONFIG: false
-          # Don't check for duplicates
+          # Don't check for duplicates in generated files
           VALIDATE_JSCPD: false
