@@ -17,8 +17,13 @@ docker build \
   --network host \
   --tag "${CONTAINER_IMAGE_ID}" .
 
+MODE="${1:-"build"}"
+ENVIRONMENT="${2:-"production"}"
+
 docker run ${DOCKER_FLAGS} \
   --rm \
   --volume "$(pwd)":"${TARGET_APP_DIR}" \
+  -p "3000:3000" \
   "${CONTAINER_IMAGE_ID}" \
-  build
+  "${MODE}" -- \
+  "${ENVIRONMENT}"

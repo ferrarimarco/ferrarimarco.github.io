@@ -10,7 +10,15 @@ This is the source code of my personal website: <https://ferrarimarco.info>
 
 - Docker 1.12+
 
-### How to Run
+### Build the website
 
-When serving the website, open your browser pointing to `http://<ip>:3000` to see the website (with BrowserSync support)
-and `http://<ip>:3001` to see the BrowserSync control panel.
+### Serve the website
+
+```shell
+scripts/build.sh "start" "development"
+```
+
+When serving the website, open your browser pointing to `http://<ip>:3000` to see the website.
+
+To read more about the features of the development web server, refer to
+[Webpack DevServer](https://webpack.js.org/configuration/dev-server/).

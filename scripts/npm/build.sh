@@ -3,7 +3,10 @@
 set -o errexit
 set -o nounset
 
-# webpack --config webpack.config.production.babel.js
-webpack --config webpack.config.development.babel.js
+ENVIRONMENT="${1}"
+
+echo "Building for the ${ENVIRONMENT} environment"
+
+webpack --config "webpack.config.${ENVIRONMENT}.babel.js"
 
 jekyll build --config _config.yml,_config.build.yml

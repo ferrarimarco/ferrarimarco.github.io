@@ -30,11 +30,9 @@
   },
   "scripts": {
     "build": "./scripts/npm/build.sh",
-    "build-serve": "./scripts/npm/build-serve.sh",
     "clean": "./scripts/npm/clean.sh",
     "postbuild": "./scripts/npm/postbuild.sh",
     "prebuild": "./scripts/npm/prebuild.sh",
-    "prestart": "./scripts/npm/prestart.sh",
     "start": "./scripts/npm/start.sh"
   },
   "version": "4.0.0"

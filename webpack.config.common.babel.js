@@ -4,6 +4,14 @@ import path from 'path'
 
 module.exports = {
   devServer: {
+    // allowedHosts: 'auto',
+    client: {
+      logging: 'info',
+      overlay: true,
+      progress: true,
+      reconnect: true,
+    },
+    port: 3000,
     static: {
       directory: './docs',
     },
