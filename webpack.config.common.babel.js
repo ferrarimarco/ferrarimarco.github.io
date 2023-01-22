@@ -3,6 +3,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import path from 'path'
 
 module.exports = {
+    devServer: {
+        static: {
+            directory: './docs',
+        },
+    },
     entry: "./webpack/index.js",
     module: {
         rules: [
