@@ -2,5 +2,8 @@
   "reporters": [
     "consoleFull"
   ],
+  "ignore": [
+    "**/docs/**"
+  ],
   "threshold": 5
 }

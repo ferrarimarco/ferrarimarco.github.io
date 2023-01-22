@@ -9,14 +9,14 @@ module.exports = {
       logging: 'info',
       overlay: true,
       progress: true,
-      reconnect: true,
+      reconnect: true
     },
     port: 3000,
     static: {
-      directory: './docs',
-    },
+      directory: './docs'
+    }
   },
-  entry: "./webpack/index.js",
+  entry: './webpack/index.js',
   module: {
     rules: [
       {
@@ -41,27 +41,27 @@ module.exports = {
   },
   output: {
     clean: true,
-    filename: "assets/javascript/[name].bundle.js",
-    path: path.resolve(__dirname, ".tmp/jekyll-preprocessed-src"),
+    filename: 'assets/javascript/[name].bundle.js',
+    path: path.resolve(__dirname, '.tmp/jekyll-preprocessed-src'),
   },
   plugins: [
     new CopyPlugin({
       patterns: [
         {
-          from: "src",
+          from: 'src',
           globOptions: {
-            ignore: ["**/_includes/head.html", "**/*.scss", "**/favicon.ico", "**/.gitignore"],
+            ignore: ['**/_includes/head.html', '**/*.scss', '**/favicon.ico', '**/.gitignore']
           },
-          to: "./"
-        },
-      ],
+          to: './'
+        }
+      ]
     }),
     // Inject webpack-managed assets in the head
     new HtmlWebpackPlugin({
-      favicon: "./src/assets/favicon.ico",
-      filename: "./_includes/head.html",
+      favicon: './src/assets/favicon.ico',
+      filename: './_includes/head.html',
       hash: true,
-      template: "./src/_includes/head.html"
+      template: './src/_includes/head.html'
     })
   ]
-};
+}
