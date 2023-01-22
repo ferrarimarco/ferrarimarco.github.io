@@ -7,32 +7,40 @@ jobs:
     name: Lint the codebase
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.3.0
       - name: Super-Linter
-        uses: github/super-linter@v4.9.6
+        uses: github/super-linter@v4.10.1
         env:
-          FILTER_REGEX_EXCLUDE: "docs/**"
           ERROR_ON_MISSING_EXEC_BIT: true
+          FILTER_REGEX_EXCLUDE: "docs/**"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LINTER_RULES_PATH: .
+          LINTER_RULES_PATH: config/lint
           VALIDATE_ALL_CODEBASE: true
+          # Don't validate HTML because it contains templated values
           VALIDATE_HTML: false
+          VALIDATE_JSCPD_ALL_CODEBASE: true
+          # Don't validate template files
+          VALIDATE_NATURAL_LANGUAGE: false
 
   build_prod:
     name: Build and lint the production version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.3.0
       - name: Build the production version
         run: |
           scripts/build.sh
       - name: Super-Linter (docs)
-        uses: github/super-linter@v4.9.6
+        uses: github/super-linter@v4.10.1
         env:
+          ERROR_ON_MISSING_EXEC_BIT: true
           FILTER_REGEX_INCLUDE: "docs/**"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LINTER_RULES_PATH: .
+          LINTER_RULES_PATH: config/lint
           VALIDATE_ALL_CODEBASE: true
           # Don't validate minified source
           VALIDATE_CSS: false
+          # Don't check if generated files match the configured EditorConfig style
           VALIDATE_EDITORCONFIG: false
+          # Don't check for duplicates
+          VALIDATE_JSCPD: false
