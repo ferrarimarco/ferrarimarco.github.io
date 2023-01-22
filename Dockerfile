@@ -26,7 +26,7 @@ RUN groupadd \
   "${USERNAME}" \
   && useradd \
   --gid "${USERNAME}" \
-  --shell /bin/ash \
+  --shell /bin/bash \
   --uid "${UID}" \
   "${USERNAME}" \
   && mkdir /home/"${USERNAME}" \
