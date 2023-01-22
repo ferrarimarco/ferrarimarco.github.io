@@ -1,31 +1,30 @@
-FROM ruby:3.1.2-alpine
+FROM ruby:3.2.0
 
 LABEL maintainer=ferrari.marco@gmail.com
 
-SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
 ENV PYTHONUNBUFFERED=1
 
-RUN apk add --no-cache \
-  build-base \
+RUN apt-get update \
+  && apt-get --assume-yes --no-install-recommends install \
+  build-essential \
   ca-certificates \
   make \
   npm \
   python3 \
-  py3-pip \
-  shadow \
-  && update-ca-certificates
+  python3-pip \
+  && rm -rf /var/lib/apt/lists/*
 
 ARG USERNAME=builder
 ARG UID=1000
 ARG GID=1000
+ARG BUNDLE_RETRY=3
 
-# Use the binaries provided by the shadow packages to support UIDs and GIDs
-# greater than 256000
-RUN /usr/sbin/groupadd \
+RUN groupadd \
   --gid "${GID}" \
   "${USERNAME}" \
-  && /usr/sbin/useradd \
+  && useradd \
   --gid "${USERNAME}" \
   --shell /bin/ash \
   --uid "${UID}" \
@@ -37,7 +36,7 @@ ENV APPLICATION_PATH_PARENT_PATH=/usr/src
 ENV APPLICATION_PATH="${APPLICATION_PATH_PARENT_PATH}/app"
 ENV APPLICATION_NODE_MODULES_PATH="${APPLICATION_PATH_PARENT_PATH}/node_modules"
 WORKDIR "${APPLICATION_PATH}"
-RUN mkdir -p "${APPLICATION_PATH}" "${APPLICATION_NODE_MODULES_PATH}" \
+RUN mkdir --parent "${APPLICATION_PATH}" "${APPLICATION_NODE_MODULES_PATH}" \
   && chown -R ${UID}:${GID} "${APPLICATION_PATH}" "${APPLICATION_NODE_MODULES_PATH}"
 
 USER "${USERNAME}"
@@ -45,7 +44,8 @@ USER "${USERNAME}"
 COPY --chown="${USERNAME}":"${USERNAME}" Gemfile Gemfile
 COPY --chown="${USERNAME}":"${USERNAME}" Gemfile.lock Gemfile.lock
 
-RUN bundle install
+RUN bundle install \
+  --retry="${BUNDLE_RETRY}"
 
 # Install npm modules one level above to avoid overriding them when mounting the source code.
 # Note: this works because Node recursively looks for modules traversing the directory

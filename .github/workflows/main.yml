@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   lint:
     name: Lint the codebase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.2
       - name: Super-Linter
@@ -17,16 +17,15 @@ jobs:
           LINTER_RULES_PATH: .
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_HTML: false
+
   build_prod:
     name: Build and lint the production version
-    needs:
-      - lint
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.2
       - name: Build the production version
         run: |
-          make build-prod
+          scripts/build.sh
       - name: Super-Linter (docs)
         uses: github/super-linter@v4.9.6
         env:
