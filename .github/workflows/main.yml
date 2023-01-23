@@ -41,5 +41,6 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           # Don't validate minified source
           VALIDATE_CSS: false
+          VALIDATE_JAVASCRIPT_STANDARD: false
           # Don't check for duplicates in generated files
           VALIDATE_JSCPD: false
