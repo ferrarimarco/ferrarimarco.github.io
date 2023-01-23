@@ -17,7 +17,7 @@ Here's my curriculum vitae (CV): {% assign cv_urls = author.cv_urls %}{% for url
 
 {% include contacts_list.html %}
 
-{% if site.data.publications %}
+{% if site.data.publications and site.data.publications.size != 0 %}
 
 ## Publications
 
@@ -25,7 +25,7 @@ Here's my curriculum vitae (CV): {% assign cv_urls = author.cv_urls %}{% for url
 
 {% endif %}
 
-{% if site.posts %}
+{% if site.posts and site.posts.size != 0 %}
 
 ## Posts
 
