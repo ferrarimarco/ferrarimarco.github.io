@@ -1,22 +1,28 @@
-# Personal Website
+# Personal site
 
-This is the source code of my personal website: <https://ferrarimarco.info>
+This is the source code of my personal site: <https://ferrarimarco.info>
 
-![Build and deploy](https://github.com/ferrarimarco/ferrarimarco.github.io/workflows/Build%20and%20deploy/badge.svg)
+![CI](https://github.com/ferrarimarco/ferrarimarco.github.io/workflows/Build%20and%20deploy/badge.svg)
 
 ## Development Environment
 
 ### Dependencies
 
 - Docker 1.12+
-- GNU Make
 
-### How to Run
+### Build the site
 
-See the available Make targets by running: `make help`
+```shell
+scripts/build.sh
+```
 
-When serving the website, open your browser pointing to `http://<ip>:3000` to see the website (with BrowserSync support)
-and `http://<ip>:3001` to see the BrowserSync control panel.
+### Serve the site
 
-An automated CI/CD pipeline is in charge of deploying the contents of the `dist` directory in production on each commit
-to the master branch.
+```shell
+scripts/build.sh "start" "development"
+```
+
+When serving the site, open your browser pointing to `http://<ip>:3000` to see it.
+
+To read more about the features of the development web server, refer to
+[Webpack DevServer](https://webpack.js.org/configuration/dev-server/).

@@ -1,6 +1,0 @@
----
-###############
-# Rules by id #
-###############
-MD013:
-  line_length: 120            # Line length 80 is far to short

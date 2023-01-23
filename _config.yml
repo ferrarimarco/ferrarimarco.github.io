@@ -4,10 +4,8 @@ title: Marco Ferrari - Cloud Solutions Architect - Google
 description: Personal website of Marco Ferrari
 url: https://ferrarimarco.info
 
-# Used so Jekyll outputs the site correctly so Gulp can do what it wants
 source: .tmp/jekyll-preprocessed-src
-destination: .tmp/jekyll-built
-exclude: ['assets']
+destination: docs
 
 date_format: "%Y-%m-%d"
 date_format_day: "%d"

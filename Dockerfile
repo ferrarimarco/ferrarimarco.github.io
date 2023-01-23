@@ -1,60 +1,64 @@
-FROM ruby:3.1.2-alpine
+FROM ruby:3.2.0
 
 LABEL maintainer=ferrari.marco@gmail.com
 
-SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
-RUN apk add --update --no-cache \
-  autoconf \
-  automake \
-  build-base \
+ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update \
+  && apt-get --assume-yes --no-install-recommends install \
+  build-essential \
   ca-certificates \
-  libtool \
-  nasm \
-  nodejs \
+  make \
   npm \
-  shadow \
-  && update-ca-certificates
+  python3 \
+  python3-pip \
+  && rm -rf /var/lib/apt/lists/*
 
-ARG UNAME=builder
+ARG USERNAME=builder
 ARG UID=1000
 ARG GID=1000
+ARG BUNDLE_RETRY=3
 
-# Use the binaries provided by the shadow packages to support UIDs and GIDs
-# greater than 256000
-RUN /usr/sbin/groupadd \
+RUN groupadd \
   --gid "${GID}" \
-  "${UNAME}" \
-  && /usr/sbin/useradd \
-  --gid "${UNAME}" \
-  --shell /bin/ash \
-  --uid "$UID" \
-  "${UNAME}" \
-  && mkdir /home/"${UNAME}" \
-  && chown -R "${UNAME}":"${UNAME}" /home/"${UNAME}"
+  "${USERNAME}" \
+  && useradd \
+  --gid "${USERNAME}" \
+  --shell /bin/bash \
+  --uid "${UID}" \
+  "${USERNAME}" \
+  && mkdir /home/"${USERNAME}" \
+  && chown -R "${USERNAME}":"${USERNAME}" /home/"${USERNAME}"
 
-ENV NODE_DEPENDENCIES_PATH=/usr
-WORKDIR "${NODE_DEPENDENCIES_PATH}"
-RUN chown -R ${UID}:${GID} "${NODE_DEPENDENCIES_PATH}"
+ENV APPLICATION_PATH_PARENT_PATH=/usr/src
+ENV APPLICATION_PATH="${APPLICATION_PATH_PARENT_PATH}/app"
+ENV APPLICATION_NODE_MODULES_PATH="${APPLICATION_PATH_PARENT_PATH}/node_modules"
+WORKDIR "${APPLICATION_PATH}"
+RUN mkdir --parent "${APPLICATION_PATH}" "${APPLICATION_NODE_MODULES_PATH}" \
+  && chown -R ${UID}:${GID} "${APPLICATION_PATH}" "${APPLICATION_NODE_MODULES_PATH}"
 
-USER "${UNAME}"
+USER "${USERNAME}"
 
-COPY --chown="${UNAME}":"${UNAME}" package.json package.json
-COPY --chown="${UNAME}":"${UNAME}" package-lock.json package-lock.json
+COPY --chown="${USERNAME}":"${USERNAME}" Gemfile Gemfile
+COPY --chown="${USERNAME}":"${USERNAME}" Gemfile.lock Gemfile.lock
 
-RUN npm install \
-  && npm cache clean --force \
-  && rm package.json package-lock.json
+RUN bundle install \
+  --retry="${BUNDLE_RETRY}"
 
-COPY --chown="${UNAME}":"${UNAME}" Gemfile Gemfile
-COPY --chown="${UNAME}":"${UNAME}" Gemfile.lock Gemfile.lock
+# Install npm modules one level above to avoid overriding them when mounting the source code.
+# Note: this works because Node recursively looks for modules traversing the directory
+# tree starting from the current directory and up.
+WORKDIR "${APPLICATION_PATH_PARENT_PATH}"
 
-RUN bundle config set --local system 'true' \
-  && bundle install \
-  && rm Gemfile Gemfile.lock
+COPY --chown="${USERNAME}":"${USERNAME}" package.json package.json
+COPY --chown="${USERNAME}":"${USERNAME}" package-lock.json package-lock.json
 
-ENV NODE_PATH="${NODE_DEPENDENCIES_PATH}/node_modules"
-ENV PATH="${NODE_PATH}/.bin":"${PATH}"
+RUN npm install
 
-ENTRYPOINT ["npx", "--no-install", "gulp"]
-EXPOSE 3000 3001
+WORKDIR "${APPLICATION_PATH}"
+
+EXPOSE 3000
+
+ENTRYPOINT ["npm", "run"]
