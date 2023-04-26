@@ -1,4 +1,4 @@
-FROM ruby:3.2.0
+FROM ruby:3.2.2
 
 LABEL maintainer=ferrari.marco@gmail.com
 
