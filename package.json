@@ -11,7 +11,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.4",
     "html-webpack-plugin": "^5.5.1",
-    "node-sass": "^8.0.0",
+    "node-sass": "^9.0.0",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.0",
     "style-loader": "^3.3.3",
