@@ -5,7 +5,7 @@
   },
   "description": "Marco Ferrari - Personal Website",
   "devDependencies": {
-    "@babel/core": "^7.22.19",
+    "@babel/core": "^7.22.20",
     "@babel/preset-env": "^7.22.20",
     "@babel/register": "^7.22.15",
     "copy-webpack-plugin": "^11.0.0",
