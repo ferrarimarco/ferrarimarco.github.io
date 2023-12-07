@@ -10,7 +10,7 @@
     "@babel/register": "^7.22.15",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
-    "html-webpack-plugin": "^5.5.3",
+    "html-webpack-plugin": "^5.5.4",
     "node-sass": "^9.0.0",
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
