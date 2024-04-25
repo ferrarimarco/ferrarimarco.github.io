@@ -8,7 +8,7 @@ jobs:
     name: Lint the codebase
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.3
+      - uses: actions/checkout@v4.1.4
       - name: Super-Linter
         uses: super-linter/super-linter@v5.7.2
         env:
@@ -27,7 +27,7 @@ jobs:
     name: Build and lint the production version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.3
+      - uses: actions/checkout@v4.1.4
       - name: Build the production version
         run: |
           scripts/build.sh
