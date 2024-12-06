@@ -5,7 +5,7 @@ gem 'redcarpet', '3.6.0'
 gem 'classifier-reborn', '2.3.0'
 
 # jekyll plugins
-gem 'jekyll-archives', '2.2.1'
+gem 'jekyll-archives', '2.3.0'
 gem 'jekyll-feed', '0.17.0'
 gem 'jekyll-paginate', '1.1.0'
 gem 'jekyll-sitemap', '1.4.0'
