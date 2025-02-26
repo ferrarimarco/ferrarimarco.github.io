@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem 'jekyll', '4.3.4'
-gem 'redcarpet', '3.6.0'
+gem 'redcarpet', '3.6.1'
 gem 'classifier-reborn', '2.3.0'
 
 # jekyll plugins
