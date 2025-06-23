@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.2
       - name: Super-Linter
-        uses: super-linter/super-linter@v5.7.2
+        uses: super-linter/super-linter@v7.4.0
         env:
           ERROR_ON_MISSING_EXEC_BIT: true
           FILTER_REGEX_EXCLUDE: "docs/**"
@@ -32,7 +32,7 @@ jobs:
         run: |
           scripts/build.sh
       - name: Super-Linter (docs)
-        uses: super-linter/super-linter@v5.7.2
+        uses: super-linter/super-linter@v7.4.0
         env:
           ERROR_ON_MISSING_EXEC_BIT: true
           FILTER_REGEX_INCLUDE: "docs/**"
