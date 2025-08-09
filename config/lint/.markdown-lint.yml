@@ -1,6 +1,0 @@
----
-default: true
-MD013:
-  line_length: 150
-# Disable heading check because Jekyll md files start with front matter
-MD041: false

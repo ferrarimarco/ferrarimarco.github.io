@@ -1,7 +1,0 @@
-# Packages
-node_modules/
-.tmp
-test/
-.jekyll-build
-
-*.log

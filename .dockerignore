@@ -1,9 +1,0 @@
-.git
-.github
-.tmp
-docs
-
-.gitignore
-LICENSE
-Makefile
-README.md
